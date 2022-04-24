@@ -1,0 +1,69 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-2">
+  <!-- Container wrapper -->
+  <div class="container-fluid">
+    <a class="navbar-brand me-2" href="/">
+      <img
+        src="https://i.ibb.co/rsB3mx8/logo.png"
+        alt="Logo"
+        loading="lazy"
+        style="margin-top: -1px"
+        height="16"
+      />
+    </a>
+    <!-- Toggle button -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-mdb-toggle="collapse"
+      data-mdb-target="#navbarButtonsExample"
+    >
+      <i class="fas fa-bars"></i>
+    </button>
+    <!-- Collapsible wrapper -->
+    <div class="collapse navbar-collapse" id="navbarButtonsExample">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="/dash">Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/about">About</a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            data-builder-edit="text"
+            data-builder-href="href3"
+            href=""
+            aria-controls="#picker-editor"
+            draggable="false"
+            contenteditable="true"
+          ></a>
+        </li>
+      </ul>
+
+      <% if (user) { %>
+      <div class="d-flex align-items-center">
+        <button
+          type="button"
+          class="btn btn-danger me-3"
+          style="min-width: auto"
+          onclick="window.location.href='/auth/logout'"
+        >
+          Logout <i class="fa-solid fa-arrow-right-from-bracket p-1 ps-2"></i>
+        </button>
+      </div>
+      <% } else { %>
+      <div class="d-flex align-items-center">
+        <button
+          type="button"
+          class="btn btn-dark me-3"
+          style="min-width: auto"
+          onclick="window.location.href='/login'"
+        >
+          Login <i class="fab fa-discord p-1 ps-2"></i>
+        </button>
+      </div>
+      <% } %>
+    </div>
+  </div>
+</nav>
