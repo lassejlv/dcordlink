@@ -4,7 +4,8 @@
     <a class="navbar-brand me-2" href="/">
       <img
         src="https://i.ibb.co/rsB3mx8/logo.png"
-        alt="Logo"
+        alt="logo__navbar"
+        class="logo"
         loading="lazy"
         style="margin-top: -1px"
         height="16"
@@ -22,41 +23,70 @@
     <!-- Collapsible wrapper -->
     <div class="collapse navbar-collapse" id="navbarButtonsExample">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <% if(user) { %>
         <li class="nav-item">
-          <a class="nav-link" href="/dash">Dashboard</a>
+          <a class="nav-link" href="/dash"
+            ><i class="fa-solid fa-user-gear"></i> Dashboard</a
+          >
+        </li>
+        <% } %>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/about"
+            ><i class="fa-solid fa-circle-info"></i> About</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/about">About</a>
+          <a class="nav-link" href="/developers"
+            ><i class="fa-solid fa-layer-group"></i> Developers</a
+          >
         </li>
         <li class="nav-item">
-          <a
-            class="nav-link"
-            data-builder-edit="text"
-            data-builder-href="href3"
-            href=""
-            aria-controls="#picker-editor"
-            draggable="false"
-            contenteditable="true"
-          ></a>
+          <a class="nav-link" href="/developers"
+            ><i class="fa-brands fa-discord"></i> Discord Server</a
+          >
         </li>
       </ul>
 
       <% if (user) { %>
-      <div class="d-flex align-items-center">
-        <button
-          type="button"
-          class="btn btn-danger me-3"
-          style="min-width: auto"
-          onclick="window.location.href='/auth/logout'"
-        >
-          Logout <i class="fa-solid fa-arrow-right-from-bracket p-1 ps-2"></i>
-        </button>
-      </div>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            id="navbarDropdownMenuLink"
+            data-mdb-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <span class="nav-name"
+              ><%= user.username %>#<span class="nav-name-strong"
+                ><%= user.discriminator %></span
+              ></span
+            >
+            <img
+              src="https://cdn.discordapp.com/avatars/<%= user.discordId %>/<%= user.avatar %>.png"
+              alt="avatar"
+              class="avatar"
+              loading="lazy"
+              height="32"
+            />
+          </a>
+          <div
+            class="dropdown-menu dropdown-menu-right"
+            aria-labelledby="navbarDropdownMenuLink"
+          >
+            <a class="dropdown-item" href="/dash">Dashboard</a>
+            <a class="dropdown-item" aria-label="disabled" href="/developers"
+              >Developers</a
+            >
+            <a class="dropdown-item danger" href="/logout">Logout</a>
+          </div>
+        </li>
+      </ul>
       <% } else { %>
       <div class="d-flex align-items-center">
         <button
           type="button"
-          class="btn btn-dark me-3"
+          class="btn-login me-3"
           style="min-width: auto"
           onclick="window.location.href='/login'"
         >

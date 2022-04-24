@@ -19,4 +19,8 @@ router.get("/login", (req, res) => {
   res.redirect("/auth/discord");
 });
 
+router.get("/logout", (req, res) => {
+  res.redirect("/auth/logout");
+});
+
 module.exports = router;

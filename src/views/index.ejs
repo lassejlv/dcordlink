@@ -6,5 +6,125 @@
   </head>
   <body>
     <%- include("./includes/nav.ejs") %>
+
+    <div
+      class="py-5 text-center bg-light"
+      style="font-family: 'Poppins', sans-serif"
+    >
+      <div class="container pb-md-5">
+        <div class="row d-flex justify-content-center">
+          <div class="col-lg-10">
+            <h1 class="display-3 fw-bold">
+              <span class="fs-2">Short your discord links</span>
+              <br />
+            </h1>
+            <span class="text-dark fs-5"
+              >Easy create your own shorted discord invite links, with analytics
+              & more.</span
+            >
+            <% if (user) { %>
+            <div class="mt-3">
+              <button
+                class="btn-getStarted py-3 px-5 mb-5 mb-md-0 me-md-2"
+                onclick="window.location.href='/dash'"
+              >
+                Create your link
+              </button>
+            </div>
+            <% } else { %>
+            <div class="mt-3">
+              <button
+                class="btn-getStarted py-3 px-5 mb-5 mb-md-0 me-md-2"
+                onclick="window.location.href='/login'"
+              >
+                Create your link
+              </button>
+            </div>
+            <% } %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="container pt-5">
+      <section class="mb-10 text-center">
+        <h2 class="fw-bold mb-1 text-center text-gradient-why">
+          Why is it so great?
+        </h2>
+        <p class="text-center mb-9">
+          Dcordlink provides a free and easy way to create your own shorted
+          discord invite links.
+        </p>
+        <div class="row gx-lg-5">
+          <div class="col-lg-4 col-md-12 mb-8 mb-lg-0">
+            <div class="card shadow-2-strong h-100">
+              <div
+                class="d-flex justify-content-center"
+                style="margin-top: -43px"
+              >
+                <div
+                  class="p-4 card-gradient rounded-circle shadow-5-strong d-inline-block"
+                >
+                  <i class="fa-solid fa-bolt fa-4x text-white"></i>
+                </div>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Easy to use!</h5>
+                <p class="card-text">
+                  Get started very easy, you just need a discord account and
+                  your discord server invite link.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 mb-8 mb-lg-0">
+            <div class="card shadow-2-strong h-100">
+              <div
+                class="d-flex justify-content-center"
+                style="margin-top: -43px"
+              >
+                <div
+                  class="p-4 card-gradient rounded-circle shadow-5-strong d-inline-block"
+                >
+                  <i class="fas fa-shield-alt fa-4x text-white"></i>
+                </div>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Safe</h5>
+                <p class="card-text">
+                  All your invite links are in a safe place, no one can access.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 mb-8 mb-lg-0">
+            <div class="card shadow-2-strong h-100">
+              <div
+                class="d-flex justify-content-center"
+                style="margin-top: -43px"
+              >
+                <div
+                  class="p-4 card-gradient rounded-circle shadow-5-strong d-inline-block"
+                >
+                  <i class="fas fa-chart-line fa-4x text-white"></i>
+                </div>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Analytics</h5>
+                <p class="card-text">
+                  Get analytics about your links, how many people have used
+                  them, and much more!
+                </p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <button class="btn-getStarted mt-4 py-3 px-5 mb-5 mb-md-0 me-md-2">
+              <i class="fa-solid fa-arrow-right"></i> Get started
+            </button>
+          </div>
+        </div>
+      </section>
+    </section>
   </body>
 </html>
