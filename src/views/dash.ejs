@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('./partials/head') %>
+    <title>Dcordlink - Dashboard</title>
+  </head>
+  <body>
+    <%- include("./includes/nav.ejs") %>
+
+    <div class="container text-center">
+      <div class="row pt-4 mt-5">
+        <h2 class="text-light">
+          🤗 Welcome
+          <span class="username"
+            ><%= user.username %>#<%= user.discriminator %>
+          </span>
+        </h2>
+
+        <p class="text-muted">
+          To get started, you can create a new link or edit an existing one.
+        </p>
+
+        <hr style="margin: auto; width: 45rem" size="4" />
+      </div>
+    </div>
+
+    <section class="">
+      <% invites.forEach((invite) => { %> <% if (invite.createdBy.username ===
+      user.username) { %>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="card card-invite mb-3">
+                    <div class="card-body">
+                      <p class="card-text"><%= invite.slug %></p>
+
+                      <p class="card-text" style="color: #b8b8b8">
+                        <%= invite.link %>
+                      </p>
+
+                      <button
+                        onclick="redirect('/dash/i/edit/<%= invite._id %>')"
+                        class="btn-create"
+                      >
+                        Edit Invite
+                      </button>
+                      <button
+                        onclick="redirect('/dash/i/delete/<%= invite._id %>')"
+                        class="btn-cancel"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <% } %> <% }) %> <%- include("./includes/_create-modal.ejs") %>
+    <div class="container text-center mt-5">
+      <div class="row card card-new-link">
+        <div class="card-body">
+          <button
+            type="button"
+            class="btn-none"
+            data-mdb-toggle="modal"
+            data-mdb-target="#new"
+          >
+            <i class="fa-solid fa-plus fa-xl"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <script src="./assets/js/script.js"></script>
+  </body>
+</html>

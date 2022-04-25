@@ -1,8 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
 
 body {
-  /* font-family: "Roboto", sans-serif; */
-  font-family: "Poppins", sans-serif;
+  font-family: "Roboto", sans-serif;
+
   background-color: #13171f;
 }
 
@@ -11,6 +12,7 @@ body {
   padding: 1rem;
   position: sticky;
   top: 0;
+  border-bottom: 3px solid #2c3648;
 }
 
 .nav-link {
@@ -85,7 +87,13 @@ body {
 .avatar {
   width: 2.3rem;
   height: 2.3rem;
+  margin-left: 0.5rem;
   border-radius: 50%;
+  border: 2px solid #5865f2;
+}
+
+.avatar:hover {
+  transform: scale(1.1);
 }
 
 .dropdown-toggle {
@@ -146,4 +154,96 @@ body {
   font-weight: 700 !important;
   border-radius: 0.5rem;
   transition: all 0.4s ease-in-out;
+}
+
+/* Dashboard page */
+
+.username {
+  color: #b7b7b8;
+  font-weight: 700 !important;
+  font-family: "Poppins", sans-serif;
+}
+
+.card-new-link {
+  background-image: linear-gradient(to right, #641dd7, #867eac);
+  color: #fff;
+  padding: 0.5rem;
+  width: 35rem;
+  cursor: pointer;
+  font-weight: 700 !important;
+  border-radius: 0.5rem;
+  transition: all 0.4s ease-in-out;
+}
+
+.card-new-link:hover {
+  background-image: linear-gradient(to right, #867eac, #641dd7);
+  transform: scale(1.02);
+}
+
+.btn-none {
+  background-color: transparent;
+  color: white;
+  border: 0;
+  padding: 0.8rem 4rem;
+  font-weight: 800;
+  border-radius: 0.5rem;
+  transition: all 0.4s ease-in-out;
+}
+
+.btn-cancel {
+  background-color: #f14647;
+  color: white;
+  border: 0;
+  padding: 0.4rem 1.4rem;
+  font-weight: 800;
+  border-radius: 0.2rem;
+  transition: all 0.4s ease-in-out;
+}
+
+.btn-cancel:hover {
+  background-color: #ff5f5f;
+  transform: scale(1.05);
+}
+
+.btn-create {
+  background-color: #43b581;
+  color: white;
+  border: 0;
+  padding: 0.4rem 1.4rem;
+  font-weight: 800;
+  border-radius: 0.2rem;
+  transition: all 0.4s ease-in-out;
+}
+
+.btn-create:hover {
+  background-color: #45ba85;
+  transform: scale(1.05);
+}
+
+.form-control {
+  border: 1px solid #000000;
+  background: #1b212c;
+  padding: 0.5rem;
+  font-size: 1em;
+}
+
+.form-control:focus {
+  outline: none;
+  border: 1px solid #000000;
+  background: #1b212c;
+}
+
+.card-invite {
+  background-image: linear-gradient(to right, #641dd7, #5d43d9);
+  color: #fff;
+  padding: 0.5rem;
+  width: 35rem;
+  cursor: pointer;
+  font-weight: 700 !important;
+  border-radius: 0.5rem;
+  transition: all 0.4s ease-in-out;
+}
+
+.card-invite:hover {
+  transform: none;
 }

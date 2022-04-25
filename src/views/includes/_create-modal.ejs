@@ -1,0 +1,48 @@
+<div
+  class="modal top fade"
+  id="new"
+  tabindex="-1"
+  aria-labelledby="new"
+  aria-hidden="true"
+  data-mdb-backdrop="true"
+  data-mdb-keyboard="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="background: #13171f">
+      <div class="modal-body">
+        <form action="/api/dash/create" class="text-center" method="POST">
+          <h3 class="text-light mb-4 fs-4 pt-3">Create your link</h3>
+          <div class="form-group">
+            <label for="link" class="text-light">Server Invite</label>
+            <input
+              type="text"
+              class="form-control mt-2"
+              id="link"
+              name="link"
+              placeholder="Your discord invite link, like discord.gg/invite"
+              required
+            />
+          </div>
+          <div class="form-group mt-2">
+            <label for="link" class="text-light">Vanity URL:</label>
+            <input
+              type="text"
+              class="form-control mt-2"
+              id="slug"
+              name="slug"
+              placeholder="Your Vanity URL, like dcordlink.ml/my-discord-server"
+              required
+            />
+          </div>
+
+      </div>
+      <div class="modal-footer" style="border-top: 2px solid #2c3648;">
+        <button type="button" class="btn-cancel" data-mdb-dismiss="modal">
+          Cancel
+        </button>
+        <button type="submit" class="btn-create">Create</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>

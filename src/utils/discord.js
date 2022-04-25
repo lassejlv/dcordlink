@@ -8,13 +8,14 @@ passport.use(
       clientID: process.env.DISCORD_CLIENT_ID,
       clientSecret: process.env.DISCORD_CLIENT_SECRET,
       callbackURL: process.env.DISCORD_REDIRECT_URI,
-      scope: ["identify"],
+      scope: ["identify", "email"],
     },
     async function (accessToken, refreshToken, profile, done) {
       const newUser = {
         discordId: profile.id,
         username: profile.username,
         discriminator: profile.discriminator,
+        email: profile.email,
         avatar: profile.avatar,
       };
 
