@@ -5,7 +5,7 @@
     "main": "index.js",
     "scripts": {
         "start": "node index.js",
-        "dev": "npx nodemon index.js",
+        "dev": "npx nodemon index.js"
     },
     "keywords": [],
     "author": "",
@@ -38,7 +38,7 @@
         "yourid": "^1.2.3"
     },
     "devDependencies": {
-        "node": "^16.13.2",
+        "node": "^16.13.2"
     },
     "repository": {
         "type": "git",
