@@ -14,7 +14,7 @@ router.get(
   "/discord/callback",
   passport.authenticate("discord", { failureRedirect: "/?error=true" }),
   function (req, res) {
-    res.redirect("/?success=true");
+    res.redirect("/dash");
   }
 );
 

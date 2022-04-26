@@ -15,13 +15,22 @@ router.get("/dash", ensureAuth, async (req, res) => {
     user: req.user,
     description: "Dashboard for your custom urls.",
     invites: await DiscordInvite.find({}),
+    host: process.env.HOST,
   });
 });
 
-router.get("/dash/i/delete/:id", ensureAuth, (req, res) => {
+router.get("/dash/i/:id/delete", ensureAuth, (req, res) => {
   DiscordInvite.findByIdAndDelete(req.params.id)
     .then(() => res.redirect("/dash?msg=deleted"))
     .catch((err) => console.log(err));
+});
+
+router.get("/login", (req, res) => {
+  res.redirect("/auth/discord");
+});
+
+router.get("/logout", (req, res) => {
+  res.redirect("/auth/logout");
 });
 
 router.get("/:slug", (req, res) => {
@@ -32,14 +41,6 @@ router.get("/:slug", (req, res) => {
       res.redirect(invite.link);
     })
     .catch((err) => res.redirect("/dash"));
-});
-
-router.get("/login", (req, res) => {
-  res.redirect("/auth/discord");
-});
-
-router.get("/logout", (req, res) => {
-  res.redirect("/auth/logout");
 });
 
 module.exports = router;

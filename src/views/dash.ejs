@@ -20,35 +20,35 @@
           To get started, you can create a new link or edit an existing one.
         </p>
 
-        <hr style="margin: auto; width: 45rem" size="4" />
+        <hr style="margin: auto; width: 45rem; margin-top: 10px" size="4" />
       </div>
     </div>
 
-    <section class="">
-      <% invites.forEach((invite) => { %> <% if (invite.createdBy.username ===
-      user.username) { %>
+    <section>
       <div class="container">
         <div class="row">
           <div class="col-md-12">
             <div class="card-body">
               <div class="row">
+                <% for (let invite of invites) { %> <% if
+                (invite.createdBy.username == user.username) { %>
                 <div class="col-md-4">
                   <div class="card card-invite mb-3">
                     <div class="card-body">
-                      <p class="card-text"><%= invite.slug %></p>
-
-                      <p class="card-text" style="color: #b8b8b8">
-                        <%= invite.link %>
+                      <p class="card-text"><%= invite.link %></p>
+                      <p class="card-text" style="color: #a6a7ab">
+                        <%= invite.slug %>
                       </p>
-
                       <button
-                        onclick="redirect('/dash/i/edit/<%= invite._id %>')"
+                        onclick="redirect('<%- invite.link %>')"
+                        target="_blank"
                         class="btn-create"
                       >
                         Edit Invite
                       </button>
+
                       <button
-                        onclick="redirect('/dash/i/delete/<%= invite._id %>')"
+                        onclick="redirect('/dash/i/<%- invite._id %>/delete')"
                         class="btn-cancel"
                       >
                         Delete
@@ -56,27 +56,40 @@
                     </div>
                   </div>
                 </div>
+                <% } %> <% } %>
               </div>
             </div>
           </div>
         </div>
       </div>
     </section>
-    <% } %> <% }) %> <%- include("./includes/_create-modal.ejs") %>
-    <div class="container text-center mt-5">
-      <div class="row card card-new-link">
-        <div class="card-body">
-          <button
-            type="button"
-            class="btn-none"
-            data-mdb-toggle="modal"
-            data-mdb-target="#new"
-          >
-            <i class="fa-solid fa-plus fa-xl"></i>
-          </button>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <p class="card-text">
+                    <button
+                      class="btn-new"
+                      data-mdb-toggle="modal"
+                      data-mdb-target="#new"
+                    >
+                      Create a new link
+                    </button>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </footer>
+
+    <%- include("./includes/_create-modal.ejs") %>
+
     <script src="./assets/js/script.js"></script>
   </body>
 </html>

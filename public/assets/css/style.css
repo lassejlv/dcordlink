@@ -220,6 +220,21 @@ body {
   transform: scale(1.05);
 }
 
+.btn-new {
+  background-color: #5865f2;
+  color: white;
+  border: 0;
+  padding: 0.4rem 1.4rem;
+  font-weight: 800;
+  border-radius: 0.2rem;
+  transition: all 0.4s ease-in-out;
+}
+
+.btn-new:hover {
+  background-color: #616eff;
+  transform: scale(1.05);
+}
+
 .form-control {
   border: 1px solid #000000;
   background: #1b212c;
@@ -237,7 +252,6 @@ body {
   background-image: linear-gradient(to right, #641dd7, #5d43d9);
   color: #fff;
   padding: 0.5rem;
-  width: 35rem;
   cursor: pointer;
   font-weight: 700 !important;
   border-radius: 0.5rem;
@@ -246,4 +260,11 @@ body {
 
 .card-invite:hover {
   transform: none;
+}
+
+.buttons-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
 }
