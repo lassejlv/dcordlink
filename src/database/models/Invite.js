@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const DiscordInviteSchema = new mongoose.Schema({
-  link: {
+  redirect: {
     type: String,
     required: true,
   },
@@ -16,6 +16,7 @@ const DiscordInviteSchema = new mongoose.Schema({
     type: Object,
     default: {
       id: "",
+      discord_id: "",
       username: "",
       discriminator: "",
       avatar: "",

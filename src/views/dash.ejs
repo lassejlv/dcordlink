@@ -35,12 +35,12 @@
                 <div class="col-md-4">
                   <div class="card card-invite mb-3">
                     <div class="card-body">
-                      <p class="card-text"><%= invite.link %></p>
+                      <p class="card-text"><%= invite.redirect %></p>
                       <p class="card-text" style="color: #a6a7ab">
                         <%= invite.slug %>
                       </p>
                       <button
-                        onclick="redirect('<%- invite.link %>')"
+                        onclick="redirect('/dash/i/<%- invite._id %>/edit')"
                         target="_blank"
                         class="btn-create"
                       >

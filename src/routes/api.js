@@ -14,6 +14,7 @@ router.post("/v1/dash/create", (req, res) => {
     slug,
     createdBy: {
       id: req.user.id,
+      discord_id: req.user.discordId,
       username: req.user.username,
       discriminator: req.user.discriminator,
       avatar: req.user.avatar,
@@ -28,7 +29,15 @@ router.post("/v1/dash/create", (req, res) => {
 
 router.get("/v1/invites", (req,res) => {
   DiscordInvite.find({}, (err, invites) => {
-    res.send(invites)
+   const filterInvites = invites.map((invite) => {
+     return {
+      id: invite._id,
+      redirect: invite.redirect,
+      slug: invite.slug,
+      createdBy: invite.createdBy.discord_id,
+      clicks: invite.clicks
+     };
+   })
   })
 })
 
