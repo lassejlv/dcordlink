@@ -27,20 +27,20 @@ router.post("/v1/dash/create", (req, res) => {
     .catch((err) => console.log(err));
 });
 
-router.get("/v1/invites", (req,res) => {
+router.get("/v1/invites", (req, res) => {
   DiscordInvite.find({}, (err, invites) => {
-   const filterInvites = invites.map((invite) => {
-     return {
-      id: invite._id,
-      redirect: invite.redirect,
-      slug: invite.slug,
-      createdBy: invite.createdBy.discord_id,
-      clicks: invite.clicks
-     };
-   })
+    const filterInvites = invites.map((invite) => {
+      return {
+        id: invite._id,
+        redirect: invite.redirect,
+        slug: invite.slug,
+        createdBy: invite.createdBy.discord_id,
+        clicks: invite.clicks,
+      };
+    });
 
-   res.send(filterInvites)
-  })
-})
+    res.send(filterInvites);
+  });
+});
 
 module.exports = router;

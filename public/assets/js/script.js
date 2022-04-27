@@ -15,25 +15,17 @@ function copy(url) {
   navigator.clipboard.writeText(url);
 }
 
-function validateDiscordInvite() {
-  const create = document.getElementById("create");
-  let errorMessageRed = document.getElementById("error-message-redirect");
-  let inputfield = document.getElementById("redirect");
+// function validateDiscordInvite() {
+//   const create = document.getElementById("create");
+//   let errorMessageRed = document.getElementById("error-message-redirect");
+//   let inputfield = document.getElementById("redirect");
 
-  // if the invite dont have an .gg or .com then remove the d-none class
-  if (!inputfield.value.includes(".gg") || !inputfield.value.includes(".com")) {
-    errorMessageRed.classList.remove("d-none");
-    create.disabled = false;
-  } else {
-    errorMessageRed.classList.add("d-none");
-    create.disabled = true;
-  }
-
-  // if (inputfield.value.endsWith(".gg/") || inputfield.value.endsWith(".com/")) {
-  //   errorMessageRed.classList.add("d-none");
-  //   create.disabled = false;
-  // } else {
-  //   errorMessageRed.classList.remove("d-none");
-  //   create.disabled = true;
-  // }
-}
+//   // if the invite dont have an .gg or .com then remove the d-none class
+//   if (!inputfield.value.includes(".gg") || !inputfield.value.includes(".com")) {
+//     errorMessageRed.classList.add("d-none");
+//     create.disabled = true;
+//   } else {
+//     errorMessageRed.classList.remove("d-none");
+//     create.disabled = true;
+//   }
+// }

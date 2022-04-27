@@ -1,12 +1,17 @@
 const router = require("express").Router();
 const DiscordInvite = require("../database/models/Invite");
 
-const { ensureAuth, ensureGuest } = require("../middleware/requireAuth");
+const {
+  ensureAuth,
+  ensureGuest,
+  ensureEditPermissions,
+} = require("../middleware/requireAuth");
 
 router.get("/", ensureGuest, (req, res) => {
   res.render("index", {
     user: req.user,
     description: "Custom urls for your Discord server.",
+    host: process.env.HOST,
   });
 });
 
@@ -25,6 +30,54 @@ router.get("/dash/i/:id/delete", ensureAuth, (req, res) => {
     .catch((err) => console.log(err));
 });
 
+router.get(
+  "/dash/i/:id/edit",
+  ensureAuth,
+  ensureEditPermissions,
+  (req, res) => {
+    DiscordInvite.findById(req.params.id).then((invite) =>
+      res.render("manage", {
+        user: req.user,
+        description: "Edit your custom url.",
+        invite,
+        host: process.env.HOST,
+      })
+    );
+  }
+);
+
+router.get(
+  "/dash/i/:id/edit/embed",
+  ensureAuth,
+  ensureEditPermissions,
+  (req, res) => {
+    DiscordInvite.findById(req.params.id).then((invite) =>
+      res.render("embed", {
+        user: req.user,
+        description: "Edit your custom url.",
+        invite,
+        host: process.env.HOST,
+      })
+    );
+  }
+);
+
+router.get(
+  "/dash/i/:id/edit/analytics",
+  ensureAuth,
+  ensureEditPermissions,
+  (req, res) => {
+    DiscordInvite.findById(req.params.id).then((invite) =>
+      res.render("analytics", {
+        user: req.user,
+        description: "Edit your custom url.",
+        invite,
+        host: process.env.HOST,
+      })
+    );
+  }
+);
+
 router.get("/login", (req, res) => {
   res.redirect("/auth/discord");
 });
@@ -41,6 +94,7 @@ router.get("/:slug", (req, res) => {
       res.render("invite", {
         user: req.user,
         invite: invite,
+        host: process.env.HOST,
       });
     })
     .catch((err) => res.redirect("/dash"));

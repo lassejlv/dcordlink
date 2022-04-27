@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('./partials/head') %>
+    <title>Dcordlink - Manage <%= invite.slug %></title>
+  </head>
+  <body>
+    <%- include('./includes/nav.ejs') %>
+
+    <!-- toolbar -->
+    <div class="toolbar">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="toolbar-content">
+              <div class="toolbar-content-left">
+                <h1>Manage <%= invite.slug %></h1>
+              </div>
+              <div class="toolbar-content-right">
+                <a
+                  href="/dash/i/<%= invite._id %>/edit"
+                  class="toolbar-item active"
+                  ><i class="fa-solid fa-gear"></i> Settings</a
+                >
+                <a
+                  href="/dash/i/<%= invite._id %>/edit/analytics"
+                  class="toolbar-item"
+                  ><i class="fa-solid fa-chart-line"></i> Analytics</a
+                >
+                <a
+                  href="/dash/i/<%= invite._id %>/edit/embed"
+                  class="toolbar-item"
+                  ><i class="fas fa-window-restore"></i> Embed configuration</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="container mt-5 p-4"
+      style="background: #272f40; border-radius: 5px"
+    >
+      <div class="row">
+        <div class="col-md-12">
+          <form action="/api/v1/dash/edit" method="get">
+            <div class="form-group mb-4">
+              <label for="redirect" class="mb-1 text-light">Redirect URL</label>
+              <input type="text" class="form-control" id="redirect" required
+              placeholder="Enter a discord invite link" name="redirect"
+              value="<%= invite.redirect %>"" />
+            </div>
+
+            <div class="form-group">
+              <label for="slug" class="mb-1 text-light">Vanity URL</label>
+              <input
+                type="text"
+                class="form-control"
+                id="slug"
+                name="slug"
+                value="<%= invite.slug %>"
+                disabled
+              />
+            </div>
+
+            <div class="form-group mt-3">
+              <button type="submit" class="btn-create">Save</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="container mt-5 p-4 mb-4"
+      style="background: #272f40; border-radius: 5px"
+    >
+      <div class="row">
+        <div class="col-md-12">
+          <h4 class="text-light">Danger Zone</h4>
+
+          <div class="form-group mt-3">
+            <button
+              type="button"
+              onclick="redirect('/dash/i/<%= invite._id %>/delete')"
+              class="btn-cancel"
+            >
+              Delete Invite
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

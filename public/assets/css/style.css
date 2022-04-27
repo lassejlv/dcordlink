@@ -202,7 +202,6 @@ body {
 
 .btn-cancel:hover {
   background-color: #ff5f5f;
-  transform: scale(1.05);
 }
 
 .btn-create {
@@ -217,7 +216,6 @@ body {
 
 .btn-create:hover {
   background-color: #45ba85;
-  transform: scale(1.05);
 }
 
 .btn-new {
@@ -232,7 +230,6 @@ body {
 
 .btn-new:hover {
   background-color: #616eff;
-  transform: scale(1.05);
 }
 
 .form-control {
@@ -311,4 +308,71 @@ body {
 
 [disabled] {
   cursor: not-allowed;
+}
+
+input[type="text"][disabled] {
+  background-color: #1b212c;
+}
+
+.toolbar {
+  background-color: #272f40;
+  color: white;
+  border: 0;
+  padding: 0.4rem 1.4rem;
+  font-weight: 800;
+}
+
+.toolbar-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.toolbar-content-left {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.toolbar-content-right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.toolbar-item {
+  color: #999;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-left: 2rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.toolbar-item.active {
+  color: #fff;
+  font-weight: 800;
+}
+
+.toolbar-item:hover {
+  color: #fff;
+}
+
+@media (max-width: 991px) {
+  .toolbar-content-left {
+    margin: auto;
+  }
+
+  .toolbar-content-right {
+    display: none;
+  }
+}
+
+.settings {
+  background-color: #272f40;
+  color: white;
+  border: 0;
+  padding: 0.4rem 1.4rem;
+  font-weight: 800;
 }

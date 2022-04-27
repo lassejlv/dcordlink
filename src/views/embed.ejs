@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('./partials/head') %>
+    <title>Dcordlink - Manage <%= invite.slug %></title>
+  </head>
+  <body>
+    <%- include('./includes/nav.ejs') %>
+
+    <!-- toolbar -->
+    <div class="toolbar">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="toolbar-content">
+              <div class="toolbar-content-left">
+                <h1>Manage <%= invite.slug %></h1>
+              </div>
+              <div class="toolbar-content-right">
+                <a href="/dash/i/<%= invite._id %>/edit" class="toolbar-item"
+                  ><i class="fa-solid fa-gear"></i> Settings</a
+                >
+                <a
+                  href="/dash/i/<%= invite._id %>/edit/analytics"
+                  class="toolbar-item"
+                  ><i class="fa-solid fa-chart-line"></i> Analytics</a
+                >
+                <a
+                  href="/dash/i/<%= invite._id %>/edit/embed"
+                  class="toolbar-item active"
+                  ><i class="fas fa-window-restore"></i> Embed configuration</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center text-light mt-5">
+      <h1>Coming!</h1>
+    </div>
+  </body>
+</html>
