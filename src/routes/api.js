@@ -7,7 +7,7 @@ router.get("/", (req, res) => {
   res.send("Welcome to the API");
 });
 
-router.post("/dash/create", (req, res) => {
+router.post("/v1/dash/create", (req, res) => {
   const { link, slug } = req.body;
   const newInvite = new DiscordInvite({
     link,
@@ -25,5 +25,11 @@ router.post("/dash/create", (req, res) => {
     .then((invite) => res.redirect("/dash?success=true"))
     .catch((err) => console.log(err));
 });
+
+router.get("/v1/invites", (req,res) => {
+  DiscordInvite.find({}, (err, invites) => {
+    res.send(invites)
+  })
+})
 
 module.exports = router;
