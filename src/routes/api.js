@@ -10,7 +10,7 @@ router.get("/", (req, res) => {
 router.post("/v1/dash/create", (req, res) => {
   const { link, slug } = req.body;
   const newInvite = new DiscordInvite({
-    link,
+    redirect,
     slug,
     createdBy: {
       id: req.user.id,
