@@ -38,7 +38,7 @@ router.get("/:slug", (req, res) => {
     .then((invite) => {
       invite.clicks++;
       invite.save();
-      res.redirect(invite.link);
+      res.redirect(invite.redirect);
     })
     .catch((err) => res.redirect("/dash"));
 });
