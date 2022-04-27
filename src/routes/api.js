@@ -8,7 +8,7 @@ router.get("/", (req, res) => {
 });
 
 router.post("/v1/dash/create", (req, res) => {
-  const { link, slug } = req.body;
+  const { redirect, slug } = req.body;
   const newInvite = new DiscordInvite({
     redirect,
     slug,
