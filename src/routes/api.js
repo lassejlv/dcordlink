@@ -38,6 +38,8 @@ router.get("/v1/invites", (req,res) => {
       clicks: invite.clicks
      };
    })
+
+   res.send(filterInvites)
   })
 })
 
