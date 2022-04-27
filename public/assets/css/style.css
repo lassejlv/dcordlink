@@ -251,7 +251,9 @@ body {
 .card-invite {
   background-image: linear-gradient(to right, #641dd7, #5d43d9);
   color: #fff;
-  padding: 0.5rem;
+  padding: 0.6rem;
+  padding-left: 0.6rem;
+  padding-right: 0.6rem;
   cursor: pointer;
   font-weight: 700 !important;
   border-radius: 0.5rem;
@@ -267,4 +269,46 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
+}
+
+.card-redirect {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #d6d6d6;
+}
+
+.card-gradient-redirect {
+  background-image: linear-gradient(to right, #919090, #ffffff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #fff;
+  transition: all 0.4s ease-in-out;
+}
+
+.toast-copied {
+  background-color: #43b581;
+  color: white;
+  border: 0;
+  padding: 1rem 1.4rem;
+  font-weight: 800;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  transition: all 0.4s ease-in-out;
+  animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+[disabled] {
+  cursor: not-allowed;
 }

@@ -40,6 +40,17 @@ const DiscordInviteSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+
+  // Meta
+  meta: {
+    type: Object,
+    default: {
+      title: "",
+      description: "",
+      image: "",
+      color: "",
+    },
+  },
 });
 
 module.exports = mongoose.model("DiscordInvite", DiscordInviteSchema);

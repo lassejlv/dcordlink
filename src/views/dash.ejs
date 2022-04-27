@@ -7,6 +7,10 @@
   <body>
     <%- include("./includes/nav.ejs") %>
 
+    <p class="toast-copied d-none" id="toast-copied">
+      Copied link to clipboard
+    </p>
+
     <div class="container text-center">
       <div class="row pt-4 mt-5">
         <h2 class="text-light">
@@ -35,24 +39,26 @@
                 <div class="col-md-4">
                   <div class="card card-invite mb-3">
                     <div class="card-body">
-                      <p class="card-text"><%= invite.redirect %></p>
-                      <p class="card-text" style="color: #a6a7ab">
-                        <%= invite.slug %>
-                      </p>
-                      <button
-                        onclick="redirect('/dash/i/<%- invite._id %>/edit')"
-                        target="_blank"
-                        class="btn-create"
-                      >
-                        Edit Invite
-                      </button>
+                      <div class="container">
+                        <p class="card-redirect">
+                          <%= host %>/<%= invite.slug %>
+                        </p>
 
-                      <button
-                        onclick="redirect('/dash/i/<%- invite._id %>/delete')"
-                        class="btn-cancel"
-                      >
-                        Delete
-                      </button>
+                        <div class="text-center">
+                          <button
+                            class="btn-create btn-sm"
+                            onclick="redirect('/dash/i/<%= invite._id %>/edit')"
+                          >
+                            <i class="fa-solid fa-pen-to-square"></i>
+                          </button>
+                          <button
+                            class="btn-new btn-sm"
+                            onclick="copy('<%= host %>/<%= invite.slug %>')"
+                          >
+                            <i class="fa-solid fa-copy"></i>
+                          </button>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
