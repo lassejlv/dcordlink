@@ -45,7 +45,7 @@
     >
       <div class="row">
         <div class="col-md-12">
-          <form action="/api/v1/dash/edit" method="get">
+          <form action="/api/v1/dash/edit/<%= invite._id %>?_method=PUT" method="post">
             <div class="form-group mb-4">
               <label for="redirect" class="mb-1 text-light">Redirect URL</label>
               <input type="text" class="form-control" id="redirect" required
