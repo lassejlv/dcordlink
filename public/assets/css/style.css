@@ -406,3 +406,14 @@ input[type="color"] {
 .card-embed:hover {
   transform: none !important;
 }
+.card-analytics {
+  background: none;
+  box-shadow: none;
+}
+
+.card-analytics:hover {
+  transform: none !important;
+}
+.card-no-transform {
+  transform: none !important;
+}

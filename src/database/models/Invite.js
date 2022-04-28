@@ -31,12 +31,15 @@ const DiscordInviteSchema = new mongoose.Schema({
   },
 
   // Analytics
-  clicks: {
-    type: Number,
-    default: 0,
-  },
+  // analytics: {
+  //   type: Object,
+  //   default: {
+  //     total: 0,
+  //     unique: 0,
+  //   },
+  // },
 
-  views: {
+  clicks: {
     type: Number,
     default: 0,
   },
