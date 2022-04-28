@@ -33,6 +33,7 @@
         "passport-google-oauth20": "^2.0.0",
         "passport-snapchat": "^1.0.0",
         "passport-spotify": "^2.0.0",
+        "method-override": "^3.0.0",
         "passport-twitch": "^1.0.3",
         "path": "^0.12.7",
         "yourid": "^1.2.3"
