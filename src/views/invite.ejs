@@ -1,36 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta property="og:type" content="website" />
     <% if (invite.meta.title === "") { %>
-    <title>You have been invited to join <%= invite.slug %></title>
+    <title>You have been invited to join a server!</title>
     <% } else { %>
     <title><%= invite.meta.title %></title>
-    <meta property="og:title" content="<%= invite.meta.title  %>" />
-    <% } %> <% if (invite.meta.description === "") { %>
-    <meta
-      name="description"
-      content="You have been invited to join <%= invite.slug %>."
-    />
-    <% } else { %>
-    <meta name="description" content="<%= invite.meta.description %>" />
-    <meta property="og:description" content="<%= invite.meta.description %>" />
-    <% } %> <% if (invite.meta.image === "") { %> <% } else { %>
-    <link rel="icon" href="<%= invite.meta.image  %> " />
-    <link rel="apple-tocuh-icon" href="<%= invite.meta.image  %> " />
-    <meta property="og:image" content="<%= invite.meta.image %> " />
-    <% } %> <% if (invite.meta.color === "") { %>
-    <meta name="theme-color" content="#5f37d8" />
-    <% } else { %>
-    <meta name="theme-color" content="<%= invite.meta.color  %> " />
     <% } %>
-  </head>
-  <body>
-    <script>
-      window.location.href = "<%= invite.redirect %>";
-    </script>
-  </body>
+    
+    
+    <meta property="og:site_name" content="You have been invited to join a server!" />
+    
+    
+    <% if (invite.meta.title === "") { %>
+    <meta property="og:title" content="<%= invite.slug %>">
+    
+    <meta property="twitter:title" content="<%= invite.slug  %> ">
+    <% } else { %>
+    <meta property="og:title" content="<%= invite.meta.title %>">
+    <meta property="twitter:title" content="<%= invite.meta.title %>">
+    
+    <% } %>
+    
+
+      
+    <% if (invite.meta.description === "") { %>
+    <meta property="og:description" content="You have been invited to join <%= invite.slug  %>" />
+    <% } else { %>
+    <meta property="og:description" content="<%= invite.meta.description %>" />
+    <meta property="twitter:description" content="<%= invite.meta.description %>" />
+    <% } %>
+
+
+
+    <meta property="twitter:card" content="summary">
+
+    
+
+      <% if (invite.meta.image === "") { %>
+    
+      <%  } else { %> 
+      <meta property="twitter:image" content="<%= invite.meta.image %>" />
+      <meta property="og:image" content="<%= invite.meta.image  %>" />
+      <% } %>
+  
+
+    <% if (invite.meta.color === "") { %> 
+    <meta name="theme-color" content="#272f40">
+    <% } else { %>
+    <meta name="theme-color" content="<%= invite.meta.color %>">
+    <% } %>
+    <meta http-equiv="refresh" content="0; url=<%= invite.redirect  %> ">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<body>
+  <script>
+    window.location.href = "<%= invite.redirect  %> ";
+  </script>
+</body>
 </html>

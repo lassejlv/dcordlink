@@ -215,7 +215,7 @@ body {
 }
 
 .btn-create:hover {
-  background-color: #45ba85;
+  background-color: #4dd195;
 }
 
 .btn-new {
@@ -314,6 +314,14 @@ input[type="text"][disabled] {
   background-color: #1b212c;
 }
 
+input[type="color"] {
+  width: 20rem;
+  height: 2.4rem;
+  padding: 0.5rem;
+  font-size: 1em;
+  border-radius: 0.5rem;
+}
+
 .toolbar {
   background-color: #272f40;
   color: white;
@@ -375,4 +383,26 @@ input[type="text"][disabled] {
   border: 0;
   padding: 0.4rem 1.4rem;
   font-weight: 800;
+}
+
+.toast-success {
+  background-color: #43b581;
+  color: white;
+  border: 0;
+  padding: 1rem 1.4rem;
+  font-weight: 800;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  transition: all 0.4s ease-in-out;
+  animation: fadeIn 0.5s;
+}
+
+.card-embed {
+  background: #2c2f33;
+}
+
+.card-embed:hover {
+  transform: none !important;
 }

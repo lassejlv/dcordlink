@@ -1,28 +1,72 @@
 require("dotenv").config();
 const router = require("express").Router();
 const DiscordInvite = require("../database/models/Invite");
-const User = require("../database/models/User");
 
 router.get("/", (req, res) => {
   res.send("Welcome to the API");
 });
 
-router.put("/v1/dash/create/:id", (req, res) => {
-   DiscordInvite.findByIdAndUpdate(
-        req.params.id,
-        {
-            redirect: req.body.redirect,
-        },
-        { new: true },
-        (err, user) => {
-            if (err) {
-                console.log(err);
-                res.status(500).send(err);
-            } else {
-                res.redirect("/dash");
-            }
-        }
-    );
+router.post("/v1/dash/create", (req, res) => {
+  const { redirect, slug } = req.body;
+  const newInvite = new DiscordInvite({
+    redirect,
+    slug,
+    createdBy: {
+      id: req.user.id,
+      discord_id: req.user.discordId,
+      username: req.user.username,
+      discriminator: req.user.discriminator,
+      avatar: req.user.avatar,
+    },
+  });
+
+  newInvite
+    .save()
+    .then((invite) => res.redirect("/dash?success=true"))
+    .catch((err) => console.log(err));
+});
+
+router.put("/v1/dash/edit/:id", (req, res) => {
+  DiscordInvite.findByIdAndUpdate(
+    req.params.id,
+    {
+      redirect: req.body.redirect,
+    },
+    { new: true },
+    (err, user) => {
+      if (err) {
+        console.log(err);
+        res.status(500).send(err);
+      } else {
+        req.flash("message", "Successfully updated invite.");
+        res.redirect(`/dash/i/${req.params.id}/edit`);
+      }
+    }
+  );
+});
+
+router.put("/v1/dash/edit/embed/:id", (req, res) => {
+  DiscordInvite.findByIdAndUpdate(
+    req.params.id,
+    {
+      meta: {
+        title: req.body.title,
+        description: req.body.description,
+        color: req.body.color,
+        image: req.body.image,
+      },
+    },
+    { new: true },
+    (err, user) => {
+      if (err) {
+        console.log(err);
+        res.status(500).send(err);
+      } else {
+        req.flash("messageEmbed", "Successfully updated embed.");
+        res.redirect(`/dash/i/${req.params.id}/edit/embed`);
+      }
+    }
+  );
 });
 
 router.get("/v1/invites", (req, res) => {

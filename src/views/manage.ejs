@@ -39,13 +39,25 @@
       </div>
     </div>
 
+    <% if(message.length > 0) { %>
+    <p class="toast-success"><%= message %></p>
+    <% } %>
+
+    <script>
+      setTimeout(function () {
+        document.querySelector(".toast-success").remove();
+      }, 3000);
+    </script>
     <div
       class="container mt-5 p-4"
       style="background: #272f40; border-radius: 5px"
     >
       <div class="row">
         <div class="col-md-12">
-          <form action="/api/v1/dash/edit/<%= invite._id %>?_method=PUT" method="post">
+          <form
+            action="/api/v1/dash/edit/<%= invite._id %>?_method=PUT"
+            method="post"
+          >
             <div class="form-group mb-4">
               <label for="redirect" class="mb-1 text-light">Redirect URL</label>
               <input type="text" class="form-control" id="redirect" required

@@ -13,7 +13,9 @@
     "dependencies": {
         "body-parser": "^1.19.1",
         "chalk": "^3.0.0",
+        "connect-flash": "0.1.1",
         "connect-mongo": "^3.2.0",
+        "cookie-parser": "^1.4.6",
         "cors": "^2.8.5",
         "dotenv": "^14.3.2",
         "ejs": "^3.1.6",
@@ -33,9 +35,9 @@
         "passport-google-oauth20": "^2.0.0",
         "passport-snapchat": "^1.0.0",
         "passport-spotify": "^2.0.0",
-        "method-override": "^3.0.0",
         "passport-twitch": "^1.0.3",
         "path": "^0.12.7",
+        "req-flash": "^0.0.3",
         "yourid": "^1.2.3"
     },
     "devDependencies": {

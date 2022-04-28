@@ -41,6 +41,7 @@ router.get(
         description: "Edit your custom url.",
         invite,
         host: process.env.HOST,
+        message: req.flash("message"),
       })
     );
   }
@@ -57,6 +58,7 @@ router.get(
         description: "Edit your custom url.",
         invite,
         host: process.env.HOST,
+        message: req.flash("messageEmbed"),
       })
     );
   }
