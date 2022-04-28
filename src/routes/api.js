@@ -9,7 +9,7 @@ router.get("/", (req, res) => {
 
 router.put("/v1/dash/create/:id", (req, res) => {
    DiscordInvite.findByIdAndUpdate(
-        req.params.id
+        req.params.id,
         {
             redirect: req.body.redirect,
         },
