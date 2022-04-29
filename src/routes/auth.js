@@ -1,6 +1,8 @@
 const router = require("express").Router();
 const passport = require("passport");
 const User = require("../database/models/User");
+const Discord = require("discord.js");
+const bot = require("../bot");
 
 router.get("/", (req, res) => {
   res.send(200);
@@ -14,6 +16,18 @@ router.get(
   "/discord/callback",
   passport.authenticate("discord", { failureRedirect: "/?error=true" }),
   function (req, res) {
+    let channel = bot.channels.cache.get("969674349693001778");
+
+    let embed = new Discord.MessageEmbed()
+      .setTitle("👤 New User")
+      .setDescription(
+        `<@${req.user.discordId}> has joined **Dcordlink**, we hope you enjoy your stay!`
+      )
+
+      .setColor("#0099ff");
+
+    channel.send(embed);
+
     res.redirect("/dash");
   }
 );

@@ -1,5 +1,7 @@
 const router = require("express").Router();
 const DiscordInvite = require("../database/models/Invite");
+const Discord = require("discord.js");
+const bot = require("../bot");
 
 const {
   ensureAuth,
@@ -21,12 +23,26 @@ router.get("/dash", ensureAuth, async (req, res) => {
     description: "Dashboard for your custom urls.",
     invites: await DiscordInvite.find({}),
     host: process.env.HOST,
+    messageDeleted: req.flash("messageDeleted"),
   });
 });
 
 router.get("/dash/i/:id/delete", ensureAuth, (req, res) => {
   DiscordInvite.findByIdAndDelete(req.params.id)
-    .then(() => res.redirect("/dash?msg=deleted"))
+    .then((invite) => {
+      let channel = bot.channels.cache.get("969674349693001778");
+      let embed = new Discord.MessageEmbed()
+        .setTitle("🗑 Invite Deleted")
+        .setDescription(
+          `<@${req.user.discordId}> deleted the invite **${invite.slug}**`
+        )
+        .setColor("#f14647");
+
+      channel.send(embed);
+
+      req.flash("messageDeleted", "Successfully deleted invite.");
+      res.redirect("/dash");
+    })
     .catch((err) => console.log(err));
 });
 

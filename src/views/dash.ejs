@@ -11,9 +11,17 @@
       Copied link to clipboard
     </p>
 
+    <% if(messageDeleted.length > 0) { %>
+    <p class="toast-success"><%= messageDeleted %></p>
+    <% } %>
+
     <script>
       setTimeout(function () {
         document.getElementById("toast-copied").classList.add("d-none");
+      }, 3000);
+
+      setTimeout(function () {
+        document.querySelector(".toast-success").remove();
       }, 3000);
     </script>
 
