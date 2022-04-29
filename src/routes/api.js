@@ -81,7 +81,7 @@ router.get("/v1/invites", (req, res) => {
           title: invite.meta.title,
           description: invite.meta.description,
           color: invite.meta.color,
-          icon: invite.meta.image,
+
         },
         
         analytics: {
