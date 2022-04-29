@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const DiscordInviteSchema = new mongoose.Schema({
-  redirect: {
+  code: {
     type: String,
     required: true,
   },
@@ -10,6 +10,16 @@ const DiscordInviteSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true,
+  },
+
+  guild: {
+    type: Object,
+    required: true,
+    default: {
+      id: "",
+      name: "",
+      avatar: "",
+    },
   },
 
   createdBy: {

@@ -24,6 +24,7 @@ router.get("/dash", ensureAuth, async (req, res) => {
     invites: await DiscordInvite.find({}),
     host: process.env.HOST,
     messageDeleted: req.flash("messageDeleted"),
+    error: req.flash("error"),
   });
 });
 

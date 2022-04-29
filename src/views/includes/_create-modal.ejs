@@ -14,14 +14,25 @@
           <h3 class="text-light mb-4 fs-4 pt-3">Create your link</h3>
           <div class="form-group">
             <label for="link" class="text-light">Server Invite</label>
-            <input
+            
+       
+            <div class="input-group mt-1 mb-3">
+              <div>
+                <span class="form-gg" >
+                  discord.gg/
+                </span>
+              </div>
+              <input
               type="text"
-              class="form-control mt-2"
-              id="redirect"
-              name="redirect"
-              placeholder="Your discord invite link, like discord.gg/invite"
+              class=" mr-5 form-control"
+              id="code"
+              name="code"
+              placeholder="Your discord invite code like w8CskyqV9B"
               required
             />
+            </div>
+            
+            
             <div class="text-danger mt-3 d-none" id="error-message-redirect">
               <p>
                 <i class="fas fa-exclamation-circle"></i>  Please enter a valid discord invite link.

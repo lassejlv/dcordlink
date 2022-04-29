@@ -245,6 +245,21 @@ body {
   background: #1b212c;
 }
 
+.form-gg {
+  border: 1px solid #000000;
+  background: #1b212c;
+  padding: 0.5rem;
+  font-size: 1em;
+  border-radius-left: 0.2rem;
+}
+
+.input-group {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
 .card-invite {
   background-image: linear-gradient(to right, #641dd7, #5d43d9);
   color: #fff;
@@ -387,6 +402,20 @@ input[type="color"] {
 
 .toast-success {
   background-color: #43b581;
+  color: white;
+  border: 0;
+  padding: 1rem 1.4rem;
+  font-weight: 800;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  transition: all 0.4s ease-in-out;
+  animation: fadeIn 0.5s;
+}
+
+.toast-error {
+  background-color: #f14647;
   color: white;
   border: 0;
   padding: 1rem 1.4rem;

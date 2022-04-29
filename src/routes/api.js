@@ -3,46 +3,73 @@ const router = require("express").Router();
 const DiscordInvite = require("../database/models/Invite");
 const Discord = require("discord.js");
 const bot = require("../bot");
+const fetch = require("node-fetch");
 
 router.get("/", (req, res) => {
   res.send("Welcome to the API");
 });
 
 router.post("/v1/dash/create", (req, res) => {
-  const { redirect, slug } = req.body;
-  const newInvite = new DiscordInvite({
-    redirect,
-    slug,
-    createdBy: {
-      id: req.user.id,
-      discord_id: req.user.discordId,
-      username: req.user.username,
-      discriminator: req.user.discriminator,
-      avatar: req.user.avatar,
-    },
-  });
+  const { code, slug } = req.body;
 
-  newInvite
-    .save()
-    .then((invite) => res.redirect("/dash"))
-    .catch((err) => console.log(err));
+  fetch(`https://discord.com/api/v8/invites/${code}`)
+    .then((res) => res.json())
+    .then((data) => {
+      if (data.code === 10006) {
+        req.flash("error", "Invalid invite code");
+        res.redirect("/dash");
+      } else {
+        const newInvite = new DiscordInvite({
+          code,
+          slug,
 
-  let channel = bot.channels.cache.get(process.env.DISCORD_LOG_CHANNEL_ID);
-  let embed = new Discord.MessageEmbed()
-    .setTitle("➕ New Invite")
-    .setDescription(
-      `<@${req.user.discordId}> created the invite **${newInvite.slug}**`
-    )
-    .setColor("#43b581");
+          guild: {
+            id: data.guild.id,
+            name: data.guild.name,
+            avatar: data.guild.icon,
+          },
 
-  channel.send(embed);
+          meta: {
+            title: data.guild.name,
+            image: `https://cdn.discordapp.com/icons/${data.guild.id}/${data.guild.icon}`,
+            description: `You have been invited to join ${data.guild.name}`,
+            color: "#5865F2",
+          },
+
+          createdBy: {
+            id: req.user.id,
+            discord_id: req.user.discordId,
+            username: req.user.username,
+            discriminator: req.user.discriminator,
+            avatar: req.user.avatar,
+          },
+        });
+
+        newInvite
+          .save()
+          .then((invite) => res.redirect("/dash"))
+          .catch((err) => console.log(err));
+
+        let channel = bot.channels.cache.get(
+          process.env.DISCORD_LOG_CHANNEL_ID
+        );
+        let embed = new Discord.MessageEmbed()
+          .setTitle("➕ New Invite")
+          .setDescription(
+            `<@${req.user.discordId}> created the invite **${newInvite.slug}**`
+          )
+          .setColor("#43b581");
+
+        channel.send(embed);
+      }
+    });
 });
 
 router.put("/v1/dash/edit/:id", (req, res) => {
   DiscordInvite.findByIdAndUpdate(
     req.params.id,
     {
-      redirect: req.body.redirect,
+      code: req.body.code,
     },
     { new: true },
     (err, invite) => {
@@ -78,7 +105,6 @@ router.put("/v1/dash/edit/embed/:id", (req, res) => {
         title: req.body.title,
         description: req.body.description,
         color: req.body.color,
-        image: req.body.image,
       },
     },
     { new: true },
