@@ -83,10 +83,6 @@ router.get("/v1/invites", (req, res) => {
           color: invite.meta.color,
 
         },
-        
-        analytics: {
-          total: invite.clicks
-        },
        
       };
     });
