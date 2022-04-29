@@ -30,7 +30,7 @@ router.get("/dash", ensureAuth, async (req, res) => {
 router.get("/dash/i/:id/delete", ensureAuth, (req, res) => {
   DiscordInvite.findByIdAndDelete(req.params.id)
     .then((invite) => {
-      let channel = bot.channels.cache.get("969674349693001778");
+      let channel = bot.channels.cache.get(process.env.DISCORD_LOG_CHANNEL_ID);
       let embed = new Discord.MessageEmbed()
         .setTitle("🗑 Invite Deleted")
         .setDescription(

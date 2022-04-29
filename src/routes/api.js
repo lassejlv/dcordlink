@@ -24,10 +24,10 @@ router.post("/v1/dash/create", (req, res) => {
 
   newInvite
     .save()
-    .then((invite) => res.redirect("/dash?success=true"))
+    .then((invite) => res.redirect("/dash"))
     .catch((err) => console.log(err));
 
-  let channel = bot.channels.cache.get("969674349693001778");
+  let channel = bot.channels.cache.get(process.env.DISCORD_LOG_CHANNEL_ID);
   let embed = new Discord.MessageEmbed()
     .setTitle("➕ New Invite")
     .setDescription(
@@ -50,7 +50,9 @@ router.put("/v1/dash/edit/:id", (req, res) => {
         console.log(err);
         res.status(500).send(err);
       } else {
-        let channel = bot.channels.cache.get("969674349693001778");
+        let channel = bot.channels.cache.get(
+          process.env.DISCORD_LOG_CHANNEL_ID
+        );
 
         let embed = new Discord.MessageEmbed()
           .setTitle("✏ Invite Edited")
@@ -85,7 +87,9 @@ router.put("/v1/dash/edit/embed/:id", (req, res) => {
         console.log(err);
         res.status(500).send(err);
       } else {
-        let channel = bot.channels.cache.get("969674349693001778");
+        let channel = bot.channels.cache.get(
+          process.env.DISCORD_LOG_CHANNEL_ID
+        );
 
         let embed = new Discord.MessageEmbed()
           .setTitle("✏ Invite Edited")

@@ -16,7 +16,7 @@ router.get(
   "/discord/callback",
   passport.authenticate("discord", { failureRedirect: "/?error=true" }),
   function (req, res) {
-    let channel = bot.channels.cache.get("969674349693001778");
+    let channel = bot.channels.cache.get(process.env.DISCORD_LOG_CHANNEL_ID);
 
     let embed = new Discord.MessageEmbed()
       .setTitle("👤 New User")
