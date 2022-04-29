@@ -73,11 +73,21 @@ router.get("/v1/invites", (req, res) => {
   DiscordInvite.find({}, (err, invites) => {
     const filterInvites = invites.map((invite) => {
       return {
-        id: invite._id,
         redirect: invite.redirect,
+        owner: invite.createdBy.discord_id,
         slug: invite.slug,
-        createdBy: invite.createdBy.discord_id,
-        clicks: invite.clicks,
+       
+        meta: {
+          title: invite.meta.title,
+          description: invite.meta.description,
+          color: invite.meta.color,
+          icon: invite.meta.image,
+        },
+        
+        analytics: {
+          total: invite.clicks
+        },
+       
       };
     });
 
