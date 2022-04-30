@@ -12,7 +12,12 @@ router.get("/", (req, res) => {
 router.post("/v1/dash/create", (req, res) => {
   const { code, slug } = req.body;
 
-  fetch(`https://discord.com/api/v8/invites/${code}`)
+  fetch(`https://discord.com/api/v8/invites/${code}`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bot ${process.env.DISCORD_BOT_TOKEN}`,
+    },
+  })
     .then((res) => res.json())
     .then((data) => {
       if (data.code === 10006) {
