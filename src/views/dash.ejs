@@ -13,6 +13,14 @@
     <title>Dcordlink</title>
   </head>
   <body>
+    <% if(error.length > 0) { %>
+
+    <div class="bg-danger-100 p-2 text-center text-white font-bold" id="error">
+      <%= error %>
+    </div>
+
+    <% } %>
+
     <div class="bg-dark-100 min-h-screen">
       <div class="container ml-10 pt-[4rem]">
         <h1 class="text-4xl font-bold text-white mb-2">
@@ -30,9 +38,60 @@
         </p>
 
         <div class="pt-6">
-          <button class="btn-blue" data-modal-toggle="create">
+          <button
+            class="
+              bg-blue-100
+              text-white
+              font-bold
+              py-2
+              px-4
+              rounded
+              hover:bg-blue-200
+              transition-all
+            "
+            data-modal-toggle="create"
+          >
             Create new link
           </button>
+        </div>
+
+        <div class="pt-8 text-white">
+          <h2 class="font-bold mb-4 text-2xl">All links</h2>
+
+          <% if (links.length == 0) { %>
+          <p class="text-gray-400 font-light text-lg">
+            You don't have any links yet.
+            <button
+              class="text-blue-100 hover:underline"
+              data-modal-toggle="create"
+            >
+              create one?
+            </button>
+          </p>
+          <% } %>
+
+          <ul>
+            <% links.map((link) => { %>
+            <li class="font-mono mb-3">
+              <%= link.name %> -
+              <button
+                class="
+                  bg-green-100
+                  text-white
+                  font-bold
+                  py-1
+                  px-2
+                  rounded
+                  hover:bg-green-200
+                  transition-all
+                "
+                onclick="redirect('/dash/<%= link.id %>')"
+              >
+                Manage link
+              </button>
+            </li>
+            <% }) %>
+          </ul>
         </div>
       </div>
     </div>
@@ -41,7 +100,19 @@
       id="create"
       tabindex="-1"
       aria-hidden="true"
-      class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full"
+      class="
+        hidden
+        overflow-y-auto overflow-x-hidden
+        fixed
+        top-0
+        right-0
+        left-0
+        z-50
+        w-full
+        md:inset-0
+        h-modal
+        md:h-full
+      "
     >
       <div class="relative p-4 w-full max-w-md h-full md:h-auto">
         <div class="relative bg-dark-200 rounded-lg shadow">
@@ -57,7 +128,7 @@
                 <input
                   type="text"
                   name="code"
-                  class="border text-sm rounded-lg focus:outline-none block w-full p-2.5 bg-gray-600 border-gray-500 placeholder-gray-400 text-white"
+                  class="form-control"
                   placeholder="discord.gg/{invite_code}"
                   required
                 />
@@ -72,7 +143,7 @@
                 <input
                   type="text"
                   name="slug"
-                  class="border text-sm rounded-lg focus:outline-none block w-full p-2.5 bg-gray-600 border-gray-500 placeholder-gray-400 text-white"
+                  class="form-control"
                   placeholder="Enter your vanity ending"
                   required
                 />
@@ -81,13 +152,31 @@
               <button
                 type="submit"
                 data-modal-toggle="create"
-                class="bg-danger-100 text-white font-bold py-2 px-4 rounded hover:bg-danger-200 transition-all"
+                class="
+                  bg-danger-100
+                  text-white
+                  font-bold
+                  py-2
+                  px-4
+                  rounded
+                  hover:bg-danger-200
+                  transition-all
+                "
               >
                 Cancel
               </button>
               <button
                 type="submit"
-                class="bg-green-100 text-white font-bold py-2 px-4 rounded hover:bg-green-200 transition-all"
+                class="
+                  bg-green-100
+                  text-white
+                  font-bold
+                  py-2
+                  px-4
+                  rounded
+                  hover:bg-green-200
+                  transition-all
+                "
               >
                 Create link
               </button>

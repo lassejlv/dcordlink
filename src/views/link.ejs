@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../assets/css/dist.css" />
+    <script src="../assets/js/script.js" defer></script>
+    <script
+      src="https://unpkg.com/flowbite@1.4.6/dist/flowbite.js"
+      defer
+    ></script>
+    <title>Dcordlink</title>
+  </head>
+  <body class="bg-dark-100">
+    <div class="bg-dark-200 text-white">
+      <div class="md:flex md:items-center md:justify-between p-4">
+        <p class="text-center text-2xl md:text-lg mb-4 md:mb-0">
+          Manage <span class="font-bold"><%= link.name %></span>
+        </p>
+
+        <ul class="text-xs md:text-sm justify-center flex">
+          <li class="mr-4">
+            <a href="../dashboard" class="text-white font-bold"> Settings </a>
+          </li>
+          <li class="mr-4">
+            <a
+              href="/dash/<%= link.id  %>/analytics"
+              class="text-white hover:text-gray-300"
+            >
+              Analytics
+            </a>
+          </li>
+          <li class="mr-4">
+            <a
+              href="/dash/<%= link.id  %>/embed"
+              class="text-white hover:text-gray-300"
+            >
+              Embed configaration
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="container mx-9 mt-10">
+      <div class="font-bold text-3xl text-white">Basic Settings</div>
+      <form>
+        <div class="mt-4">
+          <label
+            class="block mb-2 text-sm font-medium text-gray-300"
+            for="name"
+          >
+            Invite Code
+          </label>
+          <input
+            class="form-control"
+            id="code"
+            type="text"
+            placeholder="discord.gg/{invite_code}"
+            value="<%= link.code %>"
+          />
+        </div>
+        <div class="mt-4">
+          <label
+            class="block mb-2 text-sm font-medium text-gray-300"
+            for="name"
+          >
+            Vanity Ending
+          </label>
+          <input
+            class="form-control"
+            id="slug"
+            type="text"
+            disabled
+            value="<%= link.slug %>"
+          />
+        </div>
+
+        <hr class="w-[50%] mt-5 mb-2" />
+
+        <div>
+          <button
+            class="
+              bg-danger-100
+              text-white
+              font-bold
+              py-2
+              px-8
+              rounded
+              hover:bg-danger-200
+              transition-all
+            "
+            type="reset"
+          >
+            Reset
+          </button>
+          <button
+            class="
+              bg-green-100
+              text-white
+              font-bold
+              py-2
+              px-4
+              rounded
+              hover:bg-green-200
+              transition-all
+            "
+            type="submit"
+          >
+            Update
+          </button>
+        </div>
+      </form>
+
+      <div class="mt-20">
+        <button
+          class="
+            bg-danger-100
+            text-white
+            font-bold
+            py-2
+            px-8
+            rounded
+            hover:bg-danger-200
+            transition-all
+          "
+          onclick="redirect('/dash/<%= link.id %>/delete')"
+        >
+          Delete invite
+        </button>
+      </div>
+    </div>
+  </body>
+</html>

@@ -19,7 +19,18 @@
   }
 
   .form-control {
-    @apply border-2 border-gray-200 rounded-lg px-4 py-2 focus:border-blue-500 focus:outline-none;
+    @apply border
+              text-sm
+              rounded-lg
+              focus:outline-none
+              block
+              w-full
+              p-2.5
+              bg-gray-600
+              border-gray-500
+              placeholder-gray-400
+              text-white
+              disabled:opacity-40 disabled:cursor-not-allowed;
   }
 
   .form-group {

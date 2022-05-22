@@ -19,6 +19,21 @@ const LinkSchema = new mongoose.Schema(
       required: true,
     },
 
+    name: {
+      type: String,
+      required: [true, "Please add a name"],
+    },
+
+    guild: {
+      type: String,
+      required: [true, "Please add a guild id"],
+    },
+
+    icon: {
+      type: String,
+      required: [true, "Please add an icon"],
+    },
+
     clicks: {
       type: Number,
       default: 0,
