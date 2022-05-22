@@ -1,7 +1,6 @@
 require("dotenv").config();
 require("./src/database/connect");
 require("./src/utils/discord.js");
-require("./src/bot");
 const express = require("express");
 const path = require("path");
 const app = express();
@@ -29,7 +28,7 @@ app.use(methodOverride("_method"));
 
 app.use(
   cors({
-    origin: ["http://localhost:3000", "http://127.0.0.1:8080"],
+    origin: ["http://localhost:3000"],
     credentials: true,
   })
 );

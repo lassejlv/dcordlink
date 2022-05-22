@@ -1,8 +1,7 @@
 const router = require("express").Router();
 const passport = require("passport");
 const User = require("../database/models/User");
-const Discord = require("discord.js");
-const bot = require("../bot");
+const { ensureAuth } = require("../middleware/requireAuth");
 
 router.get("/", (req, res) => {
   res.send(200);
@@ -16,19 +15,7 @@ router.get(
   "/discord/callback",
   passport.authenticate("discord", { failureRedirect: "/?error=true" }),
   function (req, res) {
-    let channel = bot.channels.cache.get(process.env.DISCORD_LOG_CHANNEL_ID);
-
-    let embed = new Discord.MessageEmbed()
-      .setTitle("👤 New User")
-      .setDescription(
-        `<@${req.user.discordId}> has joined **Dcordlink**, we hope you enjoy your stay!`
-      )
-
-      .setColor("#0099ff");
-
-    channel.send(embed);
-
-    res.redirect("/dash");
+    res.redirect("/");
   }
 );
 
@@ -39,7 +26,7 @@ router.get("/logout", (req, res) => {
   res.redirect("/");
 });
 
-router.get("/delete", (req, res) => {
+router.delete("/delete", ensureAuth, (req, res) => {
   User.findOneAndDelete({ _id: req.user._id }, (err, user) => {
     if (err) {
       console.log(err);

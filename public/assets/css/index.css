@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  .btn-blue {
+    @apply bg-blue-100 px-7 py-4 text-white  rounded-md 
+    hover:bg-blue-200 transition-all disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-blue-100;
+  }
+
+  .btn-danger {
+    @apply bg-danger-100 px-7 py-4 text-white  rounded-lg 
+    hover:bg-danger-200 transition-all disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-danger-100;
+  }
+
+  .btn-green {
+    @apply bg-green-100 px-7 py-4 text-white rounded-lg
+    hover:bg-green-200 transition-all disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-green-100;
+  }
+
+  .form-control {
+    @apply border-2 border-gray-200 rounded-lg px-4 py-2 focus:border-blue-500 focus:outline-none;
+  }
+
+  .form-group {
+    @apply flex flex-col;
+  }
+}
