@@ -56,7 +56,7 @@ const authRouter = require("./src/routes/auth");
 const indexRouter = require("./src/routes/index");
 
 // Use Routes
-app.use("/api", apiRouter);
+app.use("/api/v1", apiRouter);
 app.use("/auth", authRouter);
 app.use("/", indexRouter);
 

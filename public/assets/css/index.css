@@ -1,30 +1,33 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
+  .btn-green {
+    @apply bg-green-100 text-white font-bold py-2 px-8 rounded hover:bg-green-200 transition-all;
+  }
+
   .btn-blue {
-    @apply bg-blue-100 px-7 py-4 text-white  rounded-md 
-    hover:bg-blue-200 transition-all disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-blue-100;
+    @apply bg-blue-100 text-white font-bold py-2 px-8 rounded hover:bg-blue-200 transition-all;
   }
 
   .btn-danger {
-    @apply bg-danger-100 px-7 py-4 text-white  rounded-lg 
-    hover:bg-danger-200 transition-all disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-danger-100;
-  }
-
-  .btn-green {
-    @apply bg-green-100 px-7 py-4 text-white rounded-lg
-    hover:bg-green-200 transition-all disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-green-100;
+    @apply bg-danger-100 text-white font-bold py-2 px-8 rounded hover:bg-danger-200 transition-all;
   }
 
   .form-control {
     @apply border
               text-sm
-              rounded-lg
-              focus:outline-none
               block
-              w-full
+              mx-auto
+              md:mx-0
+              rounded
+              focus:outline-none
+              focus:ring-1
+              focus:ring-blue-100
+              w-[100%]
               p-2.5
               bg-gray-600
               border-gray-500

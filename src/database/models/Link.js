@@ -1,16 +1,17 @@
 const mongoose = require("mongoose");
+const slugify = require("slugify");
 
 const LinkSchema = new mongoose.Schema(
   {
     code: {
       type: String,
-      required: [true, "Please enter a code"],
+      required: true,
     },
 
     slug: {
       type: String,
-      required: [true, "Please add a slug"],
-      unique: [true, "Slug already in use."],
+      required: true,
+      unique: true,
     },
 
     owner: {
@@ -21,17 +22,17 @@ const LinkSchema = new mongoose.Schema(
 
     name: {
       type: String,
-      required: [true, "Please add a name"],
+      required: true,
     },
 
     guild: {
       type: String,
-      required: [true, "Please add a guild id"],
+      required: true,
     },
 
     icon: {
       type: String,
-      required: [true, "Please add an icon"],
+      required: true,
     },
 
     clicks: {
@@ -43,5 +44,14 @@ const LinkSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
+
+// use slugify to format the slug
+LinkSchema.pre("save", function (next) {
+  this.slug = slugify(this.slug, {
+    lower: true,
+    strict: true,
+  });
+  next();
+});
 
 module.exports = mongoose.model("Link", LinkSchema);

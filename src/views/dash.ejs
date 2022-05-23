@@ -5,6 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./assets/css/dist.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <script src="assets/js/script.js" defer></script>
     <script
       src="https://unpkg.com/flowbite@1.4.6/dist/flowbite.js"
@@ -12,18 +19,58 @@
     ></script>
     <title>Dcordlink</title>
   </head>
-  <body>
+  <body class="bg-dark-100">
     <% if(error.length > 0) { %>
 
-    <div class="bg-danger-100 p-2 text-center text-white font-bold" id="error">
+    <div class="bg-danger-100 p-2 text-center text-white font-bold" id="toast">
       <%= error %>
+    </div>
+
+    <% } %> <% if(errorCreate.length > 0) { %>
+
+    <div class="bg-danger-100 p-2 text-center text-white font-bold" id="toast">
+      <%= errorCreate %>
+    </div>
+
+    <% } %> <% if(success.length > 0) { %>
+
+    <div class="bg-green-100 p-2 text-center text-white font-bold" id="toast">
+      <%= success %>
+    </div>
+
+    <% } %> <% if(successDeleted.length > 0) { %>
+
+    <div class="bg-green-100 p-2 text-center text-white font-bold" id="toast">
+      <%= successDeleted %>
+    </div>
+
+    <% } %> <% if(successUpdated.length > 0) { %>
+
+    <div class="bg-green-100 p-2 text-center text-white font-bold" id="toast">
+      <%= successUpdated %>
     </div>
 
     <% } %>
 
-    <div class="bg-dark-100 min-h-screen">
-      <div class="container ml-10 pt-[4rem]">
-        <h1 class="text-4xl font-bold text-white mb-2">
+    <div
+      class="bg-green-100 p-2 text-center text-white font-bold hidden copied"
+      id="toast"
+    >
+      Copied to clipboard!
+    </div>
+
+    <div
+      class="
+        min-h-screen
+        text-center
+        justify-center
+        items-center
+        flex flex-col
+        md:text-left
+      "
+    >
+      <div class="container">
+        <h1 class="text-4xl font-bold text-white mb-2 font-robotoMono">
           <em>Create new link</em>
         </h1>
         <p class="text-gray-400 font-light text-lg">
@@ -35,6 +82,8 @@
           >
           <br />
           You can start create our edit links on this dashboard.
+
+          <br />
         </p>
 
         <div class="pt-6">
@@ -88,6 +137,22 @@
                 onclick="redirect('/dash/<%= link.id %>')"
               >
                 Manage link
+              </button>
+              <button
+                class="
+                  bg-blue-100
+                  text-white
+                  font-bold
+                  py-1
+                  px-2
+                  rounded
+                  hover:bg-blue-200
+                  transition-all
+                "
+                id="<%= link.id  %> "
+                onclick="copy('<%= host %>/<%= link.slug %>')"
+              >
+                <i class="fa-solid fa-copy"></i>
               </button>
             </li>
             <% }) %>

@@ -5,15 +5,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./assets/css/dist.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <script src="assets/js/script.js" defer></script>
     <title>Dcordlink</title>
   </head>
-  <body>
+  <body class="bg-dark-100">
     <div
-      class="min-h-screen text-center justify-center items-center bg-dark-100"
+      class="min-h-screen text-center justify-center items-center flex flex-col"
     >
-      <div class="p-[10rem]">
-        <h2 class="text-gray-100 text-5xl font-bold mb-2">
+      <div>
+        <h2
+          class="
+            text-gray-100
+            font-extrabold
+            mb-2
+            select-none
+            font-robotoMono
+            md:text-5xl
+            text-3xl
+          "
+        >
           <em>Dcordlink.ml</em>
         </h2>
         <p class="text-gray-400 font-light mb-3">
@@ -23,15 +40,47 @@
 
         <% if (user) { %>
         <button
-          class="btn-green uppercase font-bold"
+          class="
+            bg-violet-500
+            text-white
+            px-5
+            py-3
+            font-bold
+            rounded
+            hover:bg-violet-600
+            transition-all
+            duration-300
+            mb-2
+          "
           onclick="redirect('/dash')"
         >
           Go to dashboard
         </button>
+        <p class="text-sm text-gray-400">
+          Logged in as
+          <span class="text-blue-100"
+            ><%= user.username %>#<%= user.discriminator %> </span
+          >. Not you?
+          <span
+            class="text-blue-100 cursor-pointer"
+            onclick="redirect('/auth/logout')"
+            >Logout</span
+          >
+        </p>
 
         <% } else { %>
         <button
-          class="btn-blue uppercase font-bold"
+          class="
+            bg-pink-500
+            text-white
+            px-5
+            py-3
+            font-bold
+            rounded
+            hover:bg-pink-600
+            transition-all
+            duration-300
+          "
           onclick="redirect('/auth/discord')"
         >
           Login through Discord

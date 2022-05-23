@@ -20,6 +20,10 @@ module.exports = {
           200: "#e03e3e",
         },
       },
+
+      fontFamily: {
+        robotoMono: ["Roboto Mono", "monospace"],
+      },
     },
   },
   plugins: [],

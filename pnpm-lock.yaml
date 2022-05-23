@@ -34,6 +34,7 @@ specifiers:
   passport-twitch: ^1.0.3
   path: ^0.12.7
   req-flash: ^0.0.3
+  slugify: ^1.6.5
   tailwindcss: ^3.0.24
   yourid: ^1.2.3
 
@@ -69,6 +70,7 @@ dependencies:
   passport-twitch: 1.0.3
   path: 0.12.7
   req-flash: 0.0.3
+  slugify: 1.6.5
   yourid: 1.4.2
 
 devDependencies:
@@ -1909,6 +1911,11 @@ packages:
 
   /sift/16.0.0:
     resolution: {integrity: sha512-ILTjdP2Mv9V1kIxWMXeMTIRbOBrqKc4JAXmFMnFq3fKeyQ2Qwa3Dw1ubcye3vR+Y6ofA0b9gNDr/y2t6eUeIzQ==}
+    dev: false
+
+  /slugify/1.6.5:
+    resolution: {integrity: sha512-8mo9bslnBO3tr5PEVFzMPIWwWnipGS0xVbYf65zxDqfNwmzYn1LpiKNrR6DlClusuvo+hDHd1zKpmfAe83NQSQ==}
+    engines: {node: '>=8.0.0'}
     dev: false
 
   /smart-buffer/4.2.0:

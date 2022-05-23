@@ -5,6 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../assets/css/dist.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <script src="../assets/js/script.js" defer></script>
     <script
       src="https://unpkg.com/flowbite@1.4.6/dist/flowbite.js"
@@ -21,7 +28,12 @@
 
         <ul class="text-xs md:text-sm justify-center flex">
           <li class="mr-4">
-            <a href="../dashboard" class="text-white font-bold"> Settings </a>
+            <a href="/dash" class="text-white hover:text-gray-300"> Home </a>
+          </li>
+          <li class="mr-4">
+            <a href="/dash/<%= link.id  %> " class="text-white font-bold">
+              Settings
+            </a>
           </li>
           <li class="mr-4">
             <a
@@ -43,9 +55,21 @@
       </div>
     </div>
 
-    <div class="container mx-9 mt-10">
-      <div class="font-bold text-3xl text-white">Basic Settings</div>
-      <form>
+    <div
+      class="
+        container
+        mt-10
+        text-center
+        md:text-left
+        items-center
+        justify-center
+        mx-auto
+      "
+    >
+      <div class="font-bold text-3xl text-white font-robotoMono">
+        Basic Settings
+      </div>
+      <form action="/api/v1/links/<%= link.id %>?_method=PUT" method="post">
         <div class="mt-4">
           <label
             class="block mb-2 text-sm font-medium text-gray-300"
@@ -54,8 +78,9 @@
             Invite Code
           </label>
           <input
-            class="form-control"
+            class="form-control !w-[75%]"
             id="code"
+            name="code"
             type="text"
             placeholder="discord.gg/{invite_code}"
             value="<%= link.code %>"
@@ -69,7 +94,7 @@
             Vanity Ending
           </label>
           <input
-            class="form-control"
+            class="form-control !w-[75%]"
             id="slug"
             type="text"
             disabled
@@ -77,59 +102,22 @@
           />
         </div>
 
-        <hr class="w-[50%] mt-5 mb-2" />
-
-        <div>
-          <button
-            class="
-              bg-danger-100
-              text-white
-              font-bold
-              py-2
-              px-8
-              rounded
-              hover:bg-danger-200
-              transition-all
-            "
-            type="reset"
-          >
-            Reset
-          </button>
-          <button
-            class="
-              bg-green-100
-              text-white
-              font-bold
-              py-2
-              px-4
-              rounded
-              hover:bg-green-200
-              transition-all
-            "
-            type="submit"
-          >
-            Update
-          </button>
+        <div class="mt-4">
+          <button class="btn-danger" type="reset">Reset</button>
+          <button class="btn-green" type="submit">Update</button>
         </div>
       </form>
 
-      <div class="mt-20">
-        <button
-          class="
-            bg-danger-100
-            text-white
-            font-bold
-            py-2
-            px-8
-            rounded
-            hover:bg-danger-200
-            transition-all
-          "
-          onclick="redirect('/dash/<%= link.id %>/delete')"
-        >
-          Delete invite
-        </button>
-      </div>
+      <form
+        action="/api/v1/links/<%= link.id %>?_method=DELETE"
+        method="post"
+        class="mt-20"
+      >
+        <h2 class="font-bold text-white text-2xl mb-3 font-robotoMono">
+          Danger Zone
+        </h2>
+        <button type="submit" class="btn-danger">Delete invite</button>
+      </form>
     </div>
   </body>
 </html>
