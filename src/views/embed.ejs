@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../assets/css/dist.css" />
+    <link rel="stylesheet" href="../../assets/css/dist.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
@@ -31,12 +31,7 @@
             <a href="/dash" class="text-white hover:text-gray-300"> Home </a>
           </li>
           <li class="mr-4">
-            <a
-              href="/dash/<%= link.id  %> "
-              class="text-white hover:text-gray-300 font-bold"
-            >
-              Settings
-            </a>
+            <a href="/dash/<%= link.id  %> " class="text-white"> Settings </a>
           </li>
           <li class="mr-4">
             <a
@@ -49,7 +44,7 @@
           <li class="mr-4">
             <a
               href="/dash/<%= link.id  %>/embed"
-              class="text-white hover:text-gray-300"
+              class="text-white hover:text-gray-300 font-bold"
             >
               Embed configaration
             </a>
@@ -70,7 +65,7 @@
       "
     >
       <div class="font-bold text-3xl text-white font-robotoMono">
-        Basic Settings
+        <i class="fa fa-gear"></i> Embed configaration
       </div>
       <form action="/api/v1/links/<%= link.id %>?_method=PUT" method="post">
         <div class="mt-4">
@@ -78,30 +73,31 @@
             class="block mb-2 text-sm font-medium text-gray-300"
             for="name"
           >
-            Invite Code
+            Description
           </label>
-          <input
+          <textarea
             class="form-control !w-[75%]"
-            id="code"
-            name="code"
+            id="description"
+            name="description"
             type="text"
-            placeholder="discord.gg/{invite_code}"
-            value="<%= link.code %>"
-          />
+            placeholder="Enter your servers description, eg. My server is so awesome!"
+            maxlength="150"
+          >
+<%= link.description %></textarea
+          >
         </div>
         <div class="mt-4">
           <label
             class="block mb-2 text-sm font-medium text-gray-300"
             for="name"
           >
-            Vanity Ending
+            Color
           </label>
           <input
-            class="form-control !w-[75%]"
-            id="slug"
-            type="text"
-            disabled
-            value="<%= link.slug %>"
+            class="form-control !w-[15rem]"
+            name="color"
+            type="color"
+            value="<%= link.themeColor %>"
           />
         </div>
 
@@ -109,17 +105,6 @@
           <button class="btn-danger" type="reset">Reset</button>
           <button class="btn-green" type="submit">Update</button>
         </div>
-      </form>
-
-      <form
-        action="/api/v1/links/<%= link.id %>?_method=DELETE"
-        method="post"
-        class="mt-20"
-      >
-        <h2 class="font-bold text-white text-2xl mb-3 font-robotoMono">
-          Danger Zone
-        </h2>
-        <button type="submit" class="btn-danger">Delete invite</button>
       </form>
     </div>
   </body>

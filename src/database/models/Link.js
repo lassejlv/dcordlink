@@ -35,7 +35,22 @@ const LinkSchema = new mongoose.Schema(
       required: true,
     },
 
+    description: {
+      type: String,
+      required: true,
+    },
+
+    themeColor: {
+      type: String,
+      required: true,
+    },
+
     clicks: {
+      type: Number,
+      default: 0,
+    },
+
+    uniqueClicks: {
       type: Number,
       default: 0,
     },

@@ -39,4 +39,8 @@
   .form-group {
     @apply flex flex-col;
   }
+
+  input[type="color"] {
+    @apply w-[50%] h-12;
+  }
 }

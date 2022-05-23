@@ -51,6 +51,8 @@ router.post("/links", ensureAuth, (req, res) => {
           owner: req.user.id,
           name: data.guild.name,
           guild: data.guild.id,
+          description: `You have been invited to join ${data.guild.name}!`,
+          themeColor: "#5865F2",
           icon: icon,
         });
 
@@ -76,6 +78,8 @@ router.put("/links/:id", (req, res) => {
     { _id: req.params.id },
     {
       code: req.body.code,
+      description: req.body.description,
+      themeColor: req.body.color,
     },
     { new: true }
   ).then((link) => {

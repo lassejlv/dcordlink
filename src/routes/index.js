@@ -1,7 +1,11 @@
 const router = require("express").Router();
 const Link = require("../database/models/Link");
 
-const { ensureAuth, ensureGuest } = require("../middleware/requireAuth");
+const {
+  ensureAuth,
+  ensureGuest,
+  ensureEditPermissions,
+} = require("../middleware/requireAuth");
 
 router.get("/", ensureGuest, (req, res) => {
   res.render("index", {
@@ -25,7 +29,7 @@ router.get("/dash", ensureAuth, async (req, res) =>
   )
 );
 
-router.get("/dash/:id", ensureAuth, async (req, res) => {
+router.get("/dash/:id", ensureAuth, ensureEditPermissions, async (req, res) => {
   const link = await Link.findOne({ _id: req.params.id }).catch((err) =>
     res.redirect("/dash")
   );
@@ -35,10 +39,35 @@ router.get("/dash/:id", ensureAuth, async (req, res) => {
   });
 });
 
-router.get("/dash/:id/delete", ensureAuth, async (req, res) => {
-  await Link.findOneAndDelete({ _id: req.params.id });
-  res.redirect("/dash");
-});
+router.get(
+  "/dash/:id/embed",
+  ensureAuth,
+  ensureEditPermissions,
+  async (req, res) => {
+    const link = await Link.findOne({ _id: req.params.id }).catch((err) =>
+      res.redirect("/dash")
+    );
+    res.render("embed", {
+      user: req.user,
+      link: link,
+    });
+  }
+);
+
+router.get(
+  "/dash/:id/analytics",
+  ensureAuth,
+  ensureEditPermissions,
+  async (req, res) => {
+    const link = await Link.findOne({ _id: req.params.id }).catch((err) =>
+      res.redirect("/dash")
+    );
+    res.render("analytics", {
+      user: req.user,
+      link: link,
+    });
+  }
+);
 
 router.get("/:slug", async (req, res) => {
   const link = await Link.findOne({ slug: req.params.slug }).catch((err) =>
@@ -47,6 +76,7 @@ router.get("/:slug", async (req, res) => {
 
   if (link) {
     link.clicks++;
+
     link.save();
     res.redirect(`https://discord.gg/${link.code}`);
   } else {

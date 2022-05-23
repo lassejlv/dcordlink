@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../assets/css/dist.css" />
+    <link rel="stylesheet" href="../../assets/css/dist.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
@@ -16,6 +16,12 @@
     <script
       src="https://unpkg.com/flowbite@1.4.6/dist/flowbite.js"
       defer
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"
+      integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
     ></script>
     <title>Dcordlink</title>
   </head>
@@ -31,17 +37,12 @@
             <a href="/dash" class="text-white hover:text-gray-300"> Home </a>
           </li>
           <li class="mr-4">
-            <a
-              href="/dash/<%= link.id  %> "
-              class="text-white hover:text-gray-300 font-bold"
-            >
-              Settings
-            </a>
+            <a href="/dash/<%= link.id  %> " class="text-white"> Settings </a>
           </li>
           <li class="mr-4">
             <a
               href="/dash/<%= link.id  %>/analytics"
-              class="text-white hover:text-gray-300"
+              class="text-white hover:text-gray-300 font-bold"
             >
               Analytics
             </a>
@@ -70,57 +71,36 @@
       "
     >
       <div class="font-bold text-3xl text-white font-robotoMono">
-        Basic Settings
+        <i class="fa-solid fa-chart-line"></i> Analytics
+        <p class="text-gray-400 font-light text-sm mb-0 mt-2">
+          Below you can see the total clicks form your invite.
+        </p>
       </div>
-      <form action="/api/v1/links/<%= link.id %>?_method=PUT" method="post">
-        <div class="mt-4">
-          <label
-            class="block mb-2 text-sm font-medium text-gray-300"
-            for="name"
-          >
-            Invite Code
-          </label>
-          <input
-            class="form-control !w-[75%]"
-            id="code"
-            name="code"
-            type="text"
-            placeholder="discord.gg/{invite_code}"
-            value="<%= link.code %>"
-          />
+      <form>
+        <div class="bg-gray-100 rounded text-white max-w-[55rem] shadow-xl">
+          <div class="mt-5 mb-5">
+            <canvas id="<%= link.id %>" class="w-6"></canvas>
+          </div>
         </div>
-        <div class="mt-4">
-          <label
-            class="block mb-2 text-sm font-medium text-gray-300"
-            for="name"
-          >
-            Vanity Ending
-          </label>
-          <input
-            class="form-control !w-[75%]"
-            id="slug"
-            type="text"
-            disabled
-            value="<%= link.slug %>"
-          />
-        </div>
-
-        <div class="mt-4">
-          <button class="btn-danger" type="reset">Reset</button>
-          <button class="btn-green" type="submit">Update</button>
-        </div>
-      </form>
-
-      <form
-        action="/api/v1/links/<%= link.id %>?_method=DELETE"
-        method="post"
-        class="mt-20"
-      >
-        <h2 class="font-bold text-white text-2xl mb-3 font-robotoMono">
-          Danger Zone
-        </h2>
-        <button type="submit" class="btn-danger">Delete invite</button>
       </form>
     </div>
+
+    <script>
+      var ct = document.getElementById("<%= link.id %>").getContext("2d");
+
+      var myChart = new Chart(ct, {
+        type: "line",
+        data: {
+          labels: ["Total"],
+          datasets: [
+            {
+              label: "Total clicks",
+              data: [<%= link.clicks %>],
+              backgroundColor: ["rgba(66, 103, 178, 1)"],
+            },
+          ],
+        },
+      });
+    </script>
   </body>
 </html>
