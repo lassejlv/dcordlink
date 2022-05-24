@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Dev • Lv.&#39;s server</title>
+    <meta
+      property="og:site_name"
+      content="You have been invited to join a server!"
+    />
+    <meta property="og:title" content="<%= link.name %> " />
+    <meta property="og:image" content="<%= link.icon  %> " />
+    <meta property="og:description" content="<%= link.description %> " />
+    <meta property="twitter:card" content="summary" />
+    <meta property="twitter:title" content="<%= link.name %> " />
+    <meta property="twitter:image" content="<%= link.icon  %> " />
+    <meta property="twitter:description" content="<%= link.description  %> " />
+    <meta name="theme-color" content="<%= link.themeColor  %> " />
+    <meta
+      http-equiv="refresh"
+      content="0; url=https://discord.gg/<%= link.code  %> "
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <script type="text/javascript">
+      window.location.href = "https://discord.gg/<%= link.code  %> ";
+    </script>
+
+    <div class="container mx-auto">
+      <h1 class="font-bold">Redirecting to <%= link.name %>...</h1>
+      Did you not get redirected?
+      <a href="https://discord.gg/<%= link.code  %> ">Click here</a>
+    </div>
+  </body>
+</html>

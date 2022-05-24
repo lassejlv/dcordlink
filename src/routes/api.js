@@ -42,7 +42,7 @@ router.post("/links", ensureAuth, (req, res) => {
         if (data.guild.icon === null) {
           icon = "https://cdn.discordapp.com/embed/avatars/0.png";
         } else {
-          icon = data.guild.icon;
+          icon = `https://cdn.discordapp.com/icons/${data.guild.id}/${data.guild.icon}?size=256`;
         }
 
         const newLink = new Link({

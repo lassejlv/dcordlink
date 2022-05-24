@@ -78,7 +78,10 @@ router.get("/:slug", async (req, res) => {
     link.clicks++;
 
     link.save();
-    res.redirect(`https://discord.gg/${link.code}`);
+    res.render("redirect", {
+      user: req.user,
+      link: link,
+    });
   } else {
     res.redirect("/");
   }
