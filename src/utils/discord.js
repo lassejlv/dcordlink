@@ -15,6 +15,7 @@ passport.use(
         discordId: profile.id,
         username: profile.username,
         discriminator: profile.discriminator,
+        avatar: profile.avatar,
       };
 
       try {

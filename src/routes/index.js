@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const Link = require("../database/models/Link");
+const { generate } = require("yourid");
 
 const {
   ensureAuth,
@@ -7,10 +8,12 @@ const {
   ensureEditPermissions,
 } = require("../middleware/requireAuth");
 
-router.get("/", ensureGuest, (req, res) => {
+router.get("/", ensureGuest, async (req, res) => {
   res.render("index", {
     user: req.user,
     host: process.env.HOST,
+    allLinks: await Link.find({}),
+    subId: generate({ length: 10 }),
   });
 });
 
