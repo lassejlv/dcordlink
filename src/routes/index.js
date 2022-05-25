@@ -25,9 +25,6 @@ router.get("/dash", ensureAuth, async (req, res) =>
       links: links,
       error: req.flash("error"),
       success: req.flash("success"),
-      successUpdated: req.flash("success-updated"),
-      successDeleted: req.flash("success-deleted"),
-      errorCreate: req.flash("error-create"),
     })
   )
 );

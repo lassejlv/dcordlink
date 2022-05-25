@@ -63,7 +63,7 @@ router.post("/links", ensureAuth, (req, res) => {
             res.redirect("/dash");
           })
           .catch((err) => {
-            req.flash("error-create", "Something went wrong, try again!");
+            req.flash("error", "Something went wrong, try again!");
             res.redirect("/dash");
           });
       }
@@ -83,7 +83,7 @@ router.put("/links/:id", (req, res) => {
     },
     { new: true }
   ).then((link) => {
-    req.flash("success-updated", "Link was updated with success!");
+    req.flash("success", "Link was updated with success!");
     res.redirect("/dash");
   });
 });
@@ -93,7 +93,7 @@ router.put("/links/:id", (req, res) => {
 // @access  Private
 router.delete("/links/:id", (req, res) => {
   Link.findOneAndDelete({ _id: req.params.id }).then((link) => {
-    req.flash("success-deleted", "Invite was deleted with success!");
+    req.flash("success", "Invite was deleted with success!");
     res.redirect("/dash");
   });
 });

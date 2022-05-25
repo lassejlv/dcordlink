@@ -647,6 +647,11 @@ input[type="color"]{
   margin-right: auto;
 }
 
+.my-6{
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
 .my-4{
   margin-top: 1rem;
   margin-bottom: 1rem;
@@ -708,6 +713,10 @@ input[type="color"]{
   margin-right: 0.75rem;
 }
 
+.mb-6{
+  margin-bottom: 1.5rem;
+}
+
 .ml-1{
   margin-left: 0.25rem;
 }
@@ -740,12 +749,12 @@ input[type="color"]{
   height: 5rem;
 }
 
-.h-6{
-  height: 1.5rem;
-}
-
 .h-8{
   height: 2rem;
+}
+
+.h-6{
+  height: 1.5rem;
 }
 
 .min-h-screen{
@@ -794,6 +803,14 @@ input[type="color"]{
 
 .max-w-\[1400px\]{
   max-width: 1400px;
+}
+
+.max-w-\[1600px\]{
+  max-width: 1600px;
+}
+
+.max-w-\[500px\]{
+  max-width: 500px;
 }
 
 .flex-1{
@@ -877,6 +894,11 @@ input[type="color"]{
 
 .border-2{
   border-width: 2px;
+}
+
+.border-dark-200{
+  --tw-border-opacity: 1;
+  border-color: rgb(44 50 54 / var(--tw-border-opacity));
 }
 
 .border-gray-200{
@@ -1143,6 +1165,11 @@ input[type="color"]{
   color: rgb(229 231 235 / var(--tw-text-opacity));
 }
 
+.text-gray-500{
+  --tw-text-opacity: 1;
+  color: rgb(107 114 128 / var(--tw-text-opacity));
+}
+
 .shadow-xl{
   --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
@@ -1250,6 +1277,11 @@ html {
 }
 
 @media (prefers-color-scheme: dark){
+  .dark\:text-gray-400{
+    --tw-text-opacity: 1;
+    color: rgb(156 163 175 / var(--tw-text-opacity));
+  }
+
   .dark\:text-white{
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity));
@@ -1257,13 +1289,33 @@ html {
 }
 
 @media (min-width: 640px){
+  .sm\:mb-0{
+    margin-bottom: 0px;
+  }
+
+  .sm\:flex{
+    display: flex;
+  }
+
   .sm\:h-9{
     height: 2.25rem;
+  }
+
+  .sm\:items-center{
+    align-items: center;
+  }
+
+  .sm\:justify-between{
+    justify-content: space-between;
   }
 
   .sm\:px-4{
     padding-left: 1rem;
     padding-right: 1rem;
+  }
+
+  .sm\:text-center{
+    text-align: center;
   }
 }
 
@@ -1285,6 +1337,10 @@ html {
 
   .md\:mb-0{
     margin-bottom: 0px;
+  }
+
+  .md\:mr-6{
+    margin-right: 1.5rem;
   }
 
   .md\:mr-0{
@@ -1349,6 +1405,16 @@ html {
     padding: 0px;
   }
 
+  .md\:px-6{
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .md\:py-8{
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
   .md\:text-left{
     text-align: left;
   }
@@ -1376,9 +1442,19 @@ html {
     --tw-text-opacity: 1;
     color: rgb(255 255 255 / var(--tw-text-opacity));
   }
+
+  .md\:text-gray-400{
+    --tw-text-opacity: 1;
+    color: rgb(156 163 175 / var(--tw-text-opacity));
+  }
 }
 
 @media (min-width: 1024px){
+  .lg\:my-8{
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
   .lg\:px-8{
     padding-left: 2rem;
     padding-right: 2rem;

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
+<html lang="en" page-load="true" dark-mode="false" scrollbar="hidden">
+  <head tailwind="true">
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -20,17 +20,11 @@
     ></script>
     <title>Dcordlink</title>
   </head>
-  <body class="bg-dark-100">
-    <% if(error.length > 0) { %>
+  <body class="bg-dark-400">
+    <%- include("./includes/Navbar.ejs") %> <% if(error.length > 0) { %>
 
     <div class="bg-danger-100 p-2 text-center text-white font-bold" id="toast">
       <%= error %>
-    </div>
-
-    <% } %> <% if(errorCreate.length > 0) { %>
-
-    <div class="bg-danger-100 p-2 text-center text-white font-bold" id="toast">
-      <%= errorCreate %>
     </div>
 
     <% } %> <% if(success.length > 0) { %>
@@ -39,217 +33,13 @@
       <%= success %>
     </div>
 
-    <% } %> <% if(successDeleted.length > 0) { %>
-
-    <div class="bg-green-100 p-2 text-center text-white font-bold" id="toast">
-      <%= successDeleted %>
-    </div>
-
-    <% } %> <% if(successUpdated.length > 0) { %>
-
-    <div class="bg-green-100 p-2 text-center text-white font-bold" id="toast">
-      <%= successUpdated %>
-    </div>
-
-    <% } %>
+    <% } %> <
 
     <div
       class="bg-green-100 p-2 text-center text-white font-bold hidden copied"
       id="toast"
     >
       Copied to clipboard!
-    </div>
-
-    <div
-      class="
-        min-h-screen
-        text-center
-        justify-center
-        items-center
-        flex flex-col
-        md:text-left
-      "
-    >
-      <div class="container">
-        <h1 class="text-4xl font-bold text-white mb-2 font-robotoMono">
-          <em>Create new link</em>
-        </h1>
-        <p class="text-gray-400 font-light text-lg">
-          Welcome to the dashboard
-          <strong class="font-bold"
-            ><%= user.username %>#<span
-              ><%= user.discriminator %>
-            </span></strong
-          >
-          <br />
-          You can start create our edit links on this dashboard.
-
-          <br />
-        </p>
-
-        <div class="pt-6">
-          <button
-            class="
-              bg-blue-100
-              text-white
-              font-bold
-              py-2
-              px-4
-              rounded
-              hover:bg-blue-200
-              transition-all
-            "
-            data-modal-toggle="create"
-          >
-            Create new link
-          </button>
-        </div>
-
-        <div class="pt-8 text-white">
-          <h2 class="font-bold mb-4 text-2xl">All links</h2>
-
-          <% if (links.length == 0) { %>
-          <p class="text-gray-400 font-light text-lg">
-            You don't have any links yet.
-            <button
-              class="text-blue-100 hover:underline"
-              data-modal-toggle="create"
-            >
-              create one?
-            </button>
-          </p>
-          <% } %>
-
-          <ul>
-            <% links.map((link) => { %>
-            <li class="font-mono mb-3">
-              <%= link.name %> -
-              <button
-                class="
-                  bg-green-100
-                  text-white
-                  font-bold
-                  py-1
-                  px-2
-                  rounded
-                  hover:bg-green-200
-                  transition-all
-                "
-                onclick="redirect('/dash/<%= link.id %>')"
-              >
-                Manage link
-              </button>
-              <button
-                class="
-                  bg-blue-100
-                  text-white
-                  font-bold
-                  py-1
-                  px-2
-                  rounded
-                  hover:bg-blue-200
-                  transition-all
-                "
-                id="<%= link.id  %> "
-                onclick="copy('<%= host %>/<%= link.slug %>')"
-              >
-                <i class="fa-solid fa-copy"></i>
-              </button>
-            </li>
-            <% }) %>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div
-      id="create"
-      tabindex="-1"
-      aria-hidden="true"
-      class="
-        hidden
-        overflow-y-auto overflow-x-hidden
-        fixed
-        top-0
-        right-0
-        left-0
-        z-50
-        w-full
-        md:inset-0
-        h-modal
-        md:h-full
-      "
-    >
-      <div class="relative p-4 w-full max-w-md h-full md:h-auto">
-        <div class="relative bg-dark-200 rounded-lg shadow">
-          <div class="py-6 px-6 lg:px-8">
-            <h3 class="mb-4 text-xl font-medium text-white">Create new Link</h3>
-            <form class="space-y-6" action="/api/v1/links" method="post">
-              <div>
-                <label
-                  for="code"
-                  class="block mb-2 text-sm font-medium text-gray-300"
-                  >Invite Code</label
-                >
-                <input
-                  type="text"
-                  name="code"
-                  class="form-control"
-                  placeholder="discord.gg/{invite_code}"
-                  required
-                />
-              </div>
-              <div>
-                <label
-                  for="vanity"
-                  class="block mb-2 text-sm font-medium text-gray-300"
-                  >Chose your vanity ending</label
-                >
-
-                <input
-                  type="text"
-                  name="slug"
-                  class="form-control"
-                  placeholder="Enter your vanity ending"
-                  required
-                />
-              </div>
-
-              <button
-                type="submit"
-                data-modal-toggle="create"
-                class="
-                  bg-danger-100
-                  text-white
-                  font-bold
-                  py-2
-                  px-4
-                  rounded
-                  hover:bg-danger-200
-                  transition-all
-                "
-              >
-                Cancel
-              </button>
-              <button
-                type="submit"
-                class="
-                  bg-green-100
-                  text-white
-                  font-bold
-                  py-2
-                  px-4
-                  rounded
-                  hover:bg-green-200
-                  transition-all
-                "
-              >
-                Create link
-              </button>
-            </form>
-          </div>
-        </div>
-      </div>
     </div>
   </body>
 </html>
