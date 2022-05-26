@@ -1,0 +1,37 @@
+{
+  "content": null,
+  "embeds": [
+    {
+      "title": "What is Dcordlink?",
+      "description": "Dcordlink is a platform that gives you a free way to get custom discord invite vanity urls. Completely for **free**.\n\nYou can get Analytics  about your invite link, and make your own embed, with colors & description.",
+      "color": 5793266,
+      "thumbnail": {
+        "url": "https://cdn.discordapp.com/avatars/979456736412979210/09662a24064dcf540a3c968d36c5a5e7.png"
+      }
+    },
+    {
+      "title": "FAQ's",
+      "description": "Many asked questions will be answered here.",
+      "color": 5793266,
+      "fields": [
+        {
+          "name": "Can i make my invite link private from the discover page?",
+          "value": "Yes, under settings you can chose privacy."
+        },
+        {
+          "name": "My embed is not updating?",
+          "value": "If your embeddoes not update immediately, you may have to wait a few minutes for discord to update your embed. If more than an hour has passed you can make a ticket, then you will get help."
+        },
+        {
+          "name": "Is this 100% free?",
+          "value": "Yes, its a 100% free service to use. But you can only have 3 links per account."
+        },
+        {
+          "name": "Is my data safe?",
+          "value": "Your data is 100% secure with us, so you do not have to worry."
+        }
+      ]
+    }
+  ],
+  "attachments": []
+}

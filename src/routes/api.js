@@ -3,6 +3,10 @@ const router = require("express").Router();
 const { ensureAuth } = require("../middleware/requireAuth");
 const Link = require("../database/models/Link");
 const fetch = require("node-fetch");
+const bot = require("../bot/index");
+const { MessageEmbed } = require("discord.js");
+
+let channel = bot.channels.cache.get(process.env.DISCORD_GUILD_SITE_LOGS);
 
 let url = "https://discord.com/api/v8/invites/";
 
@@ -59,6 +63,21 @@ router.post("/links", ensureAuth, (req, res) => {
         newLink
           .save()
           .then((link) => {
+            let channelEmbed = bot.channels.cache.get(
+              process.env.DISCORD_GUILD_SITE_LOGS
+            );
+
+            let embed = new MessageEmbed()
+              .setColor("#5865F2")
+              .setTitle("New invite created")
+              .setDescription(`<@${req.user.discordId}> created a new invite!`)
+              .addField("Invite code", link.code, false)
+              .addField("Invite slug", link.slug, false)
+              .addField("Invite guild", link.guild, false)
+              .setThumbnail(link.icon);
+
+            channelEmbed.send(embed);
+
             req.flash("success", "Invite was created with success!");
             res.redirect("/dash");
           })
@@ -83,6 +102,21 @@ router.put("/links/:id", (req, res) => {
     },
     { new: true }
   ).then((link) => {
+    let channelEmbed = bot.channels.cache.get(
+      process.env.DISCORD_GUILD_SITE_LOGS
+    );
+
+    let embed = new MessageEmbed()
+      .setColor("#43b581")
+      .setTitle("Invite updated!")
+      .setDescription(`<@${req.user.discordId}> updated an invite!`)
+      .addField("Invite code", link.code, false)
+      .addField("Invite slug", link.slug, false)
+      .addField("Invite guild", link.guild, false)
+      .setThumbnail(link.icon);
+
+    channelEmbed.send(embed);
+
     req.flash("success", "Link was updated with success!");
     res.redirect("/dash");
   });
@@ -93,6 +127,21 @@ router.put("/links/:id", (req, res) => {
 // @access  Private
 router.delete("/links/:id", (req, res) => {
   Link.findOneAndDelete({ _id: req.params.id }).then((link) => {
+    let channelEmbed = bot.channels.cache.get(
+      process.env.DISCORD_GUILD_SITE_LOGS
+    );
+
+    let embed = new MessageEmbed()
+      .setColor("#f14647")
+      .setTitle("Invite deleted!")
+      .setDescription(`<@${req.user.discordId}> deleted an invite!`)
+      .addField("Invite code", link.code, false)
+      .addField("Invite slug", link.slug, false)
+      .addField("Invite guild", link.guild, false)
+      .setThumbnail(link.icon);
+
+    channelEmbed.send(embed);
+
     req.flash("success", "Invite was deleted with success!");
     res.redirect("/dash");
   });

@@ -25,6 +25,7 @@ router.get("/dash", ensureAuth, async (req, res) =>
       links: links,
       error: req.flash("error"),
       success: req.flash("success"),
+      subId: generate({ length: 10 }),
     })
   )
 );

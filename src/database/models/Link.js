@@ -21,6 +21,11 @@ const LinkSchema = new mongoose.Schema(
       required: true,
     },
 
+    private: {
+      type: Boolean,
+      default: false,
+    },
+
     name: {
       type: String,
       required: true,

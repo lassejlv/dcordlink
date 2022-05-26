@@ -1,6 +1,7 @@
 require("dotenv").config();
 require("./src/database/connect");
 require("./src/utils/discord.js");
+require("./src/bot");
 const express = require("express");
 const path = require("path");
 const app = express();

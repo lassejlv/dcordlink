@@ -16,7 +16,7 @@
     <script src="assets/js/script.js" defer></script>
     <script
       src="https://unpkg.com/flowbite@1.4.6/dist/flowbite.js"
-      defer
+      
     ></script>
     <title>Dcordlink</title>
   </head>
@@ -29,17 +29,143 @@
 
     <% } %> <% if(success.length > 0) { %>
 
-    <div class="bg-green-100 p-2 text-center text-white font-bold" id="toast">
+    <div class="bg-green-100 p-2 text-center text-white font-bold hidden" id="toast">
       <%= success %>
     </div>
 
-    <% } %> <
+    <% } %>
 
     <div
-      class="bg-green-100 p-2 text-center text-white font-bold hidden copied"
-      id="toast"
+      class="flex flex-col text-center items-center"
+      id="main-content"
+      sub-id="<%= subId  %> "
     >
-      Copied to clipboard!
+      <div class="mt-10">
+        <h1 class="text-white text-4xl mb-3 md:text-5xl font-bold select-none">
+          <em>Dashboard</em>
+        </h1>
+        <p class="text-sm text-gray-400 md:text-lg">
+         Welcome to your dashboard, <strong><%= user.username %>#<span class="text-gray-300"><%= user.discriminator %></span></strong>
+        </p>
+      </div>
     </div>
+
+    <div subId="<%= subId %>">
+      <hr class="w-[85%] md:w-[75%] mx-auto mt-7 border-dark-200" size="20" />
+    </div>
+
+    
+
+    <section class="py-12" id="links" subId="<%= subId %>">
+      <div>
+        <h1
+          class="
+            text-center text-3xl 
+            font-bold
+            pb-1
+            text-white
+          "
+        >
+          Your links
+        </h1>
+        <p class="text-sm text-gray-400 md:text-sm text-center pb-3">
+         You can start edit your links or create a new one.
+        </p>
+      </div>
+      <div class="flex flex-wrap justify-center">
+      
+
+        <% links.map((link) => { %>
+        <div class="w-[500px] md:w-1/3 p-3 items-center hover:scale-105 transition-all" guild="<%= link.guild %>">
+          <div class="bg-dark-300 rounded-lg shadow-lg p-6">
+            <div class="flex flex-col">
+              <div class="flex-1">
+                <h3 class="text-lg text-gray-200 font-bold">
+                  <em><%= link.name %></em>
+
+                  <% if (link.clicks === 1) { %>
+                  <spa class="text-sm text-gray-400"><%= link.clicks %> click</span>
+                  <% } else { %>
+                  <span class="text-xs text-gray-400">
+                    <%= link.clicks %> clicks
+                  </span>
+                  <% } %>
+                </h3>
+                <p class="text-xs text-gray-400"><%= link.description %></p>
+
+                <img
+                  src="<%= link.icon %>"
+                  alt="<%= link.name %>"
+                  class="w-[5rem] h-[5rem] object-cover mb-2 mt-2 rounded-full"
+                />
+              </div>
+              <div class="flex-2">
+                <a
+                  href="/dash/<%= link.id  %>"
+                  class="
+                    inline-block
+                    px-4
+                    py-2
+                    text-white
+                    bg-gradient-to-r
+                    from-green-100
+                    to-green-500
+                    rounded-md
+                    font-bold
+                    focus:ring-2
+                  "
+                >
+                  Edit link
+                </a>
+                <a
+                onclick="copy('<%= host %>/<%= link.slug %>')"
+                id="copy"
+                class="
+                  inline-block
+                  px-4
+                  py-2
+                  text-white
+                  bg-gradient-to-r
+                  from-blue-100
+                  to-blue-500
+                  rounded-md
+                  font-bold
+                  cursor-pointer
+                  focus:ring-2
+                  
+                "
+              >
+                Copy link
+              </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% }) %>
+        <div class="w-[500px] md:w-1/3 p-3 items-center hover:scale-105 transition-all cursor-pointer">
+          <div class="bg-gradient-to-r from-blue-100 to-blue-500 rounded-lg shadow-lg p-6">
+            <div class="flex flex-col">
+              <div class="flex-1 text-center">
+                <button type="button"
+                data-modal-toggle="create-modal"
+                 class="text-lg text-gray-200 font-bold">
+                  <i class="fa-solid fa-plus fa-xl"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <%- include("./includes/Create.ejs")  %> 
+
+    <div subId="<%= subId %>">
+      <hr class="w-[85%] md:w-[75%] mx-auto mt-7 border-dark-200" size="20" />
+    </div>
+
+    <%- include("./includes/Footer.ejs")  %> 
+
+    
   </body>
 </html>

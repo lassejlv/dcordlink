@@ -1,0 +1,86 @@
+<div
+  id="create-modal"
+  tabindex="-1"
+  aria-hidden="true"
+  class="
+    hidden
+    overflow-y-auto overflow-x-hidden
+    fixed
+    top-0
+    right-0
+    left-0
+    z-50
+    w-full
+    md:inset-0
+    h-modal
+    md:h-full
+    justify-center
+    items-center
+  "
+>
+  <div class="relative p-4 w-full max-w-md h-full md:h-auto">
+    <div class="relative bg-dark-300 rounded-md shadow">
+      <div class="py-6 px-6 lg:px-8">
+        <h3 class="mb-4 text-xl font-medium text-white">Create a new link</h3>
+        <form class="space-y-6" action="/api/v1/links" method="post">
+          <div>
+            <label
+              for="code"
+              class="block mb-2 text-sm font-medium text-gray-300"
+              >Discord Invite Code</label
+            >
+            <input type="text" name="code" class=" form-control" "
+            placeholder="Type/paste your discord invite code, eg: ZxA4ws6P6R"
+            required />
+          </div>
+          <div>
+            <label
+              for="vanity"
+              class="block mb-2 text-sm font-medium text-gray-300"
+              >Vanity Ending</label
+            >
+            <input
+              type="text"
+              name="slug"
+              placeholder="Type/paste your vanity ending, eg: my-discord-server"
+              class="form-control"
+              required
+            />
+          </div>
+          <button
+            data-modal-toggle="create-modal"
+            class="
+              px-8
+              py-2
+              bg-danger-100
+              hover:bg-danger-200
+              text-white
+              font-bold
+              transition-all
+              focus:ring
+              rounded-md
+            "
+          >
+            <i class="fa-solid fa-xmark"></i> Cancel
+          </button>
+          <button
+            type="submit"
+            class="
+              px-8
+              py-2
+              bg-blue-100
+              hover:bg-blue-200
+              text-white
+              font-bold
+              transition-all
+              focus:ring
+              rounded-md
+            "
+          >
+            <i class="fa-solid fa-plus"></i> Create
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
