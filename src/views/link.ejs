@@ -20,7 +20,8 @@
     <title>Dcordlink</title>
   </head>
   <body class="bg-dark-400">
-    <div class="bg-dark-200 text-white">
+    <%- include("./includes/Navbar.ejs") %>
+    <div class="bg-dark-100 text-white">
       <div class="md:flex md:items-center md:justify-between p-4">
         <p class="text-center text-2xl md:text-lg mb-4 md:mb-0">
           Manage <span class="font-bold"><%= link.name %></span>
@@ -103,6 +104,42 @@
             disabled
             value="<%= link.slug %>"
           />
+        </div>
+
+        <div class="mt-4">
+          <label
+            class="block mb-2 text-sm font-medium text-gray-300"
+            for="name"
+          >
+            Privacy
+          </label>
+         
+          <select
+          class="form-control !w-[75%]"
+          id="private"
+          name="private"
+      >
+          <option
+              value="false"
+              <%-
+             link.private == "false"
+                  ? "selected"
+                  : ""
+              %>
+          >
+              Public (Anyone is able to discover this link)
+          </option>
+          <option
+              value="true"
+              <%-
+              link.private == "true"
+                  ? "selected"
+                  : ""
+              %>
+          >
+              Private (Public, but can not be discovered by anyone)
+          </option>
+      </select>
         </div>
 
         <div class="mt-4">

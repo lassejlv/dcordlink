@@ -19,6 +19,16 @@ module.exports = {
     });
   },
 
+  ensurePermissions: function (req, res, next) {
+    Link.findOne({ _id: req.params.id, owner: req.user.id }).then((link) => {
+      if (link) {
+        return next();
+      } else {
+        res.redirect("/dash");
+      }
+    });
+  },
+
   ensureGuest: function (req, res, next) {
     if (!req.isAuthenticated()) {
       return next();

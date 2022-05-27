@@ -5,6 +5,7 @@ const UserSchema = new mongoose.Schema(
     discordId: { type: String, required: true },
     username: { type: String, required: true },
     discriminator: { type: String, required: true },
+    maxLinks: { type: Number, default: 3 },
     avatar: { type: String, required: true },
   },
   {
