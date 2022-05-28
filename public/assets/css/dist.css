@@ -884,6 +884,10 @@ input[type="color"]{
   border-width: 2px;
 }
 
+.border{
+  border-width: 1px;
+}
+
 .border-dark-200{
   --tw-border-opacity: 1;
   border-color: rgb(44 50 54 / var(--tw-border-opacity));
@@ -899,24 +903,19 @@ input[type="color"]{
   border-color: rgb(88 101 242 / var(--tw-border-opacity));
 }
 
+.bg-dark-400{
+  --tw-bg-opacity: 1;
+  background-color: rgb(18 20 23 / var(--tw-bg-opacity));
+}
+
 .bg-dark-100{
   --tw-bg-opacity: 1;
   background-color: rgb(35 39 42 / var(--tw-bg-opacity));
 }
 
-.bg-dark-200{
-  --tw-bg-opacity: 1;
-  background-color: rgb(44 50 54 / var(--tw-bg-opacity));
-}
-
 .bg-gray-100{
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
-}
-
-.bg-dark-400{
-  --tw-bg-opacity: 1;
-  background-color: rgb(18 20 23 / var(--tw-bg-opacity));
 }
 
 .bg-danger-100{
@@ -1172,8 +1171,20 @@ input[type="color"]{
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
+.outline{
+  outline-style: solid;
+}
+
 .transition-all{
   transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.transition{
+  transition-property: color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }

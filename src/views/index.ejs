@@ -21,6 +21,13 @@
   </head>
   <body class="bg-dark-400">
     <%- include('./includes/Navbar.ejs') %>
+    <% if(error.length > 0) { %>
+
+      <div class="bg-danger-100 p-2 text-center text-white font-bold" id="toast">
+        <%= error %>
+      </div>
+  
+      <% } %>
     <div
       class="flex flex-col text-center items-center"
       id="main-content"

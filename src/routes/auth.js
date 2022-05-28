@@ -13,7 +13,7 @@ router.get("/discord", passport.authenticate("discord"));
 
 router.get(
   "/discord/callback",
-  passport.authenticate("discord", { failureRedirect: "/?error=true" }),
+  passport.authenticate("discord", { failureRedirect: "/" }),
   function (req, res) {
     res.redirect("/");
   }

@@ -6,6 +6,7 @@ const UserSchema = new mongoose.Schema(
     username: { type: String, required: true },
     discriminator: { type: String, required: true },
     maxLinks: { type: Number, default: 3 },
+    banned: { type: Boolean, default: false },
     avatar: { type: String, required: true },
   },
   {

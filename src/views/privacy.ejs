@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" page-load="true" dark-mode="false" scrollbar="hidden">
+  <head tailwind="true">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./assets/css/dist.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="assets/js/script.js" defer></script>
+    <script
+      src="https://unpkg.com/flowbite@1.4.6/dist/flowbite.js"
+      defer
+    ></script>
+    <title>Dcordlink</title>
+  </head>
+  <body class="bg-dark-400">
+    <%- include('./includes/Navbar.ejs') %>
+
+    <section class="" id="privacy" subId="<%= subId  %> "></section>
+
+    <div subId="<%= subId %>">
+      <hr class="w-[85%] md:w-[75%] mx-auto mt-7 border-dark-200" size="20" />
+    </div>
+
+    <%- include("./includes/Footer.ejs") %>
+  </body>
+</html>

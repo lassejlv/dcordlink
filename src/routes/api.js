@@ -5,7 +5,10 @@ const Link = require("../database/models/Link");
 const fetch = require("node-fetch");
 const bot = require("../bot/index");
 const { MessageEmbed } = require("discord.js");
-const { ensurePermissions } = require("../middleware/requireAuth");
+const {
+  ensurePermissions,
+  ensureBanned,
+} = require("../middleware/requireAuth");
 const User = require("../database/models/User");
 
 let url = "https://discord.com/api/v8/invites/";
@@ -14,21 +17,10 @@ router.get("/", (req, res) => {
   res.redirect("/");
 });
 
-// Link routes
-
-// @desc    Get the current users links
-// @route   GET /api/v1/links
-// @access  Private
-router.get("/links", ensureAuth, (req, res) => {
-  Link.find({ owner: req.user.id })
-    .then((links) => res.json(links))
-    .catch((err) => res.status(500).json({ msg: "Server error" }));
-});
-
 // @desc    Create a link
 // @route   POST /api/v1/links
 // @access  Private
-router.post("/links", ensureAuth, (req, res) => {
+router.post("/links", ensureAuth, ensureBanned, (req, res) => {
   fetch(url + req.body.code, {
     method: "GET",
     headers: {
@@ -42,8 +34,10 @@ router.post("/links", ensureAuth, (req, res) => {
         res.redirect("/dash");
       } else {
         User.findByIdAndUpdate({ _id: req.user.id }).then((user) => {
-          user.maxLinks--;
-          user.save();
+          if (user.maxLinks > 0) {
+            user.maxLinks -= 1;
+            user.save();
+          }
         });
 
         if (req.user.maxLinks === 0 || req.user.maxLinks < 0) {
@@ -93,7 +87,10 @@ router.post("/links", ensureAuth, (req, res) => {
               res.redirect("/dash");
             })
             .catch((err) => {
-              req.flash("error", "Something went wrong, try again!");
+              req.flash(
+                "error",
+                "Duplicate error, please try again with a different code/vanity ending"
+              );
               res.redirect("/dash");
             });
         }
@@ -104,65 +101,102 @@ router.post("/links", ensureAuth, (req, res) => {
 // @desc    Update a link
 // @route   PUT /api/v1/links
 // @access  Private
-router.put("/links/:id", ensureAuth, ensurePermissions, (req, res) => {
-  Link.findOneAndUpdate(
-    { _id: req.params.id },
-    {
-      code: req.body.code,
-      description: req.body.description,
-      themeColor: req.body.color,
-      private: req.body.private,
-    },
-    { new: true }
-  ).then((link) => {
-    let channelEmbed = bot.channels.cache.get(
-      process.env.DISCORD_GUILD_SITE_LOGS
-    );
+router.put(
+  "/links/:id",
+  ensureAuth,
+  ensurePermissions,
+  ensureBanned,
+  (req, res) => {
+    Link.findOneAndUpdate(
+      { _id: req.params.id },
+      {
+        code: req.body.code,
+        description: req.body.description,
+        themeColor: req.body.color,
+        private: req.body.private,
+      },
+      { new: true }
+    ).then((link) => {
+      let channelEmbed = bot.channels.cache.get(
+        process.env.DISCORD_GUILD_SITE_LOGS
+      );
 
-    let embed = new MessageEmbed()
-      .setColor("#43b581")
-      .setTitle("Invite updated!")
-      .setDescription(`<@${req.user.discordId}> updated an invite!`)
-      .addField("Invite code", link.code, false)
-      .addField("Invite slug", link.slug, false)
-      .addField("Invite guild", link.guild, false)
-      .setThumbnail(link.icon);
+      let embed = new MessageEmbed()
+        .setColor("#43b581")
+        .setTitle("Invite updated!")
+        .setDescription(`<@${req.user.discordId}> updated an invite!`)
+        .addField("Invite code", link.code, false)
+        .addField("Invite slug", link.slug, false)
+        .addField("Invite guild", link.guild, false)
+        .setThumbnail(link.icon);
 
-    channelEmbed.send(embed);
+      channelEmbed.send(embed);
 
-    req.flash("success", "Link was updated with success!");
-    res.redirect("/dash");
-  });
-});
+      req.flash("success", "Link was updated with success!");
+      res.redirect("/dash");
+    });
+  }
+);
 
 // @desc    Delete a link
 // @route   DELETE /api/v1/links
 // @access  Private
-router.delete("/links/:id", ensureAuth, ensurePermissions, (req, res) => {
-  Link.findOneAndDelete({ _id: req.params.id }).then((link) => {
-    let channelEmbed = bot.channels.cache.get(
-      process.env.DISCORD_GUILD_SITE_LOGS
-    );
+router.delete(
+  "/links/:id",
+  ensureAuth,
+  ensurePermissions,
+  ensureBanned,
+  (req, res) => {
+    Link.findOneAndDelete({ _id: req.params.id }).then((link) => {
+      let channelEmbed = bot.channels.cache.get(
+        process.env.DISCORD_GUILD_SITE_LOGS
+      );
 
-    User.findByIdAndUpdate({ _id: req.user.id }).then((user) => {
-      user.maxLinks++;
-      user.save();
+      User.findByIdAndUpdate({ _id: req.user.id }).then((user) => {
+        user.maxLinks++;
+        user.save();
+      });
+
+      let embed = new MessageEmbed()
+        .setColor("#f14647")
+        .setTitle("Invite deleted!")
+        .setDescription(`<@${req.user.discordId}> deleted an invite!`)
+        .addField("Invite code", link.code, false)
+        .addField("Invite slug", link.slug, false)
+        .addField("Invite guild", link.guild, false)
+        .setThumbnail(link.icon);
+
+      channelEmbed.send(embed);
+
+      req.flash("success", "Invite was deleted with success!");
+      res.redirect("/dash");
     });
+  }
+);
 
-    let embed = new MessageEmbed()
-      .setColor("#f14647")
-      .setTitle("Invite deleted!")
-      .setDescription(`<@${req.user.discordId}> deleted an invite!`)
-      .addField("Invite code", link.code, false)
-      .addField("Invite slug", link.slug, false)
-      .addField("Invite guild", link.guild, false)
-      .setThumbnail(link.icon);
-
-    channelEmbed.send(embed);
-
-    req.flash("success", "Invite was deleted with success!");
-    res.redirect("/dash");
+// @desc    Get your own user data.
+// @route   GET /api/v1/@me
+// @access  Private
+router.get("/@me", ensureAuth, ensureBanned, async (req, res) => {
+  User.findById(req.user.id).then((user) => {
+    res.json({
+      discordId: user.discordId,
+      username: user.username + "#" + user.discriminator,
+      maxLinks: user.maxLinks,
+      avatar: user.avatar,
+      createdAt: user.createdAt,
+      updatedAt: user.updatedAt,
+    });
   });
+});
+
+// @desc    Get all your links.
+// @route   GET /api/v1/@me/links
+// @access  Private
+router.get("/@me/links", ensureAuth, ensureBanned, async (req, res) => {
+  Link.find({ owner: req.user.id })
+    .then((links) => res.json(links))
+    .catch((err) => res.status(500).json({ msg: "Server error" }));
 });
 
 module.exports = router;
