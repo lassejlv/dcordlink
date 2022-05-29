@@ -8,6 +8,7 @@ const { MessageEmbed } = require("discord.js");
 const {
   ensurePermissions,
   ensureBanned,
+  ensureAdmin,
 } = require("../middleware/requireAuth");
 const User = require("../database/models/User");
 
@@ -87,10 +88,7 @@ router.post("/links", ensureAuth, ensureBanned, (req, res) => {
               res.redirect("/dash");
             })
             .catch((err) => {
-              req.flash(
-                "error",
-                "Duplicate error, please try again with a different code/vanity ending"
-              );
+              req.flash("error", "Something went wrong, try again!");
               res.redirect("/dash");
             });
         }
@@ -197,6 +195,34 @@ router.get("/@me/links", ensureAuth, ensureBanned, async (req, res) => {
   Link.find({ owner: req.user.id })
     .then((links) => res.json(links))
     .catch((err) => res.status(500).json({ msg: "Server error" }));
+});
+
+// @desc    Ban a user
+// @route   GET /api/v1/ban/:id
+// @access  Admin (permissions: 2)
+router.get("/ban/:id", ensureAuth, ensureAdmin, async (req, res) => {
+  User.findByIdAndUpdate(req.params.id, { banned: true })
+    .then((user) => {
+      req.flash("success", "User was banned with success!");
+      res.redirect("/admin");
+    })
+    .catch((err) => {
+      res.json({ msg: "User not found", error: err.message });
+    });
+});
+
+// @desc    Unban a user
+// @route   GET /api/v1/unban/:id
+// @access  Admin (permissions: 2)
+router.get("/unban/:id", ensureAuth, ensureAdmin, async (req, res) => {
+  User.findByIdAndUpdate(req.params.id, { banned: false })
+    .then((user) => {
+      req.flash("success", "User was unbanned with success!");
+      res.redirect("/admin");
+    })
+    .catch((err) => {
+      res.json({ msg: "User not found", error: err.message });
+    });
 });
 
 module.exports = router;

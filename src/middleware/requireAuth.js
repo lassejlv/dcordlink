@@ -30,7 +30,14 @@ module.exports = {
     });
   },
 
-  // if the user is banned, redirect to the dashboard
+  ensureAdmin: function (req, res, next) {
+    if (req.user.role === 2) {
+      return next();
+    } else {
+      res.redirect("/");
+    }
+  },
+
   ensureBanned: function (req, res, next) {
     if (req.isAuthenticated() && req.user.banned === false) {
       return next();

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" page-load="true" dark-mode="false" scrollbar="hidden">
+  <head tailwind="true">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./assets/css/dist.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="../assets/js/script.js" defer></script>
+    <script
+      src="https://unpkg.com/flowbite@1.4.6/dist/flowbite.js"
+      defer
+    ></script>
+    <title>Dcordlink - Admin</title>
+  </head>
+  <body class="bg-dark-400">
+    <%- include('./includes/Navbar.ejs') %> <% if(success.length > 0) { %>
+
+    <div
+      class="bg-green-100 p-2 text-center text-white font-bold hidden"
+      id="toast"
+    >
+      <%= success %>
+    </div>
+    <% } %>
+
+    <section class="" id="admin" subId="<%= subId  %>" payload="">
+      <div class="relative overflow-x-auto shadow-md">
+        <table class="w-full text-sm text-left text-gray-400">
+          <thead class="text-sm text-white bg-dark-100">
+            <tr>
+              <th scope="col" class="px-6 py-3">Id</th>
+              <th scope="col" class="px-6 py-3">Username</th>
+              <th scope="col" class="px-6 py-3">Max Links</th>
+              <th scope="col" class="px-6 py-3">Ban/Unban</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% users.map((user) => { %>
+            <tr
+              class="bg-dark-300 border-b border-dark-300"
+              user_id="<%= user.id  %> "
+            >
+              <th
+                scope="row"
+                class="
+                  px-6
+                  py-4
+                  font-medium
+                  text-gray-900
+                  dark:text-white
+                  whitespace-nowrap
+                "
+              >
+                <%= user.discordId %>
+              </th>
+              <td class="px-6 py-4">
+                <%= user.username %>#<%= user.discriminator %>
+              </td>
+              <td class="px-6 py-4"><%= user.maxLinks %></td>
+              <td class="px-6 py-4">
+                <% if(user.banned === false) { %>
+                <button
+                  class="btn-blue"
+                  onclick="redirect('/api/v1/ban/<%= user.id %>')"
+                >
+                  <i class="fa-solid fa-hammer"></i> Ban
+                </button>
+                <% } else { %>
+                <button
+                  class="btn-danger"
+                  onclick="redirect('/api/v1/unban/<%= user.id %>')"
+                >
+                  <i class="fa-solid fa-hammer"></i> Unban
+                </button>
+                <% } %>
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </body>
+</html>

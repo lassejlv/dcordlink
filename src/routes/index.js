@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const Link = require("../database/models/Link");
+const User = require("../database/models/User");
 const { generate } = require("yourid");
 
 const {
@@ -7,9 +8,10 @@ const {
   ensureGuest,
   ensureEditPermissions,
   ensureBanned,
+  ensureAdmin,
 } = require("../middleware/requireAuth");
 
-router.get("/", ensureGuest, ensureBanned, async (req, res) => {
+router.get("/", ensureGuest, async (req, res) => {
   res.render("index", {
     user: req.user,
     host: process.env.HOST,
@@ -23,6 +25,16 @@ router.get("/privacy", (req, res) => {
   res.render("privacy", {
     user: req.user,
     host: process.env.HOST,
+    subId: generate({ length: 10 }),
+  });
+});
+
+router.get("/admin", ensureAuth, ensureAdmin, async (req, res) => {
+  res.render("admin", {
+    user: req.user,
+    host: process.env.HOST,
+    success: req.flash("success"),
+    users: await User.find({}),
     subId: generate({ length: 10 }),
   });
 });
@@ -41,6 +53,7 @@ router.get("/dash/banned", ensureAuth, (req, res) => {
 
   <center>
     <button onclick="window.location.replace('/dash/banned/appeal')">Appeal</button>
+    <button style="background-color: #f14647" onclick="window.location.replace('/auth/logout')">Logout</button>
   </center>
 
   
@@ -93,7 +106,6 @@ router.get("/dash", ensureAuth, ensureBanned, async (req, res) =>
         links: links,
         error: req.flash("error"),
         success: req.flash("success"),
-
         subId: generate({ length: 10 }),
       })
     )

@@ -203,6 +203,27 @@
             ><i class="fa fa-home"></i> Home</a
           >
         </li>
+        <% if (user)  { %>
+          <% if (user.role === 2)  { %>
+            <li>
+              <a
+                href="/admin"
+                class="
+                  block
+                  py-2
+                  pr-4
+                  pl-3
+                  text-gray-400
+                  rounded
+                  md:bg-transparent md:text-gray-400 hover:text-white md:p-0 
+                  
+                "
+                aria-current="page"
+                ><i class="fa-solid fa-user-plus"></i> Admin</a
+              >
+            </li>
+            <% } %>
+          <% } %>  
         <li>
           <a
             href="#"
